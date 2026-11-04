@@ -3,47 +3,684 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>你的名字</title>
+<title>SHERRISEOK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #171818;
+    --panel: #292a2a;
+    --panel-light: #414445;
+    --mid: #5c6263;
+    --text: #bec0c2;
+    --text-dim: #8f9295;
+    --accent: #ff6ec7;
+  }
   body {
-    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: #faf6f3;
-    color: #2b2b2b;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans SC", "PingFang SC", sans-serif;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
-  .card { text-align: center; padding: 40px 24px; max-width: 560px; }
-  h1 { font-size: 2.4rem; letter-spacing: 3px; margin-bottom: 12px; }
-  .sub { color: #8a7f78; margin-bottom: 28px; letter-spacing: 1px; }
-  p.bio { line-height: 2; margin-bottom: 36px; font-size: 1.02rem; }
-  .links a {
+
+  /* ===== 页面切换 ===== */
+  .screen { display: none; min-height: 100vh; padding: 48px 24px; }
+  .screen.active { display: block; }
+  .inner { max-width: 960px; margin: 0 auto; }
+
+  /* ===== 新拟态立体卡片 ===== */
+  .neu {
+    background: var(--panel);
+    border-radius: 26px;
+    box-shadow:
+      10px 12px 26px rgba(0,0,0,.5),
+      inset 0 1px 0 rgba(255,255,255,.04);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .neu:hover {
+    transform: translateY(-5px);
+    box-shadow:
+      14px 18px 32px rgba(0,0,0,.55),
+      0 0 24px rgba(255,110,199,.15),
+      inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  .neu:active { transform: translateY(-1px); }
+
+  /* ===== 首页 ===== */
+  .home-head { text-align: center; margin-bottom: 56px; }
+  .home-head .tag {
+    font-size: .85rem; letter-spacing: 6px; color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .home-head h1 {
+    font-family: "ZCOOL QingKe HuangYou", "Noto Sans SC", sans-serif;
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    letter-spacing: 6px;
+    line-height: 1.1;
+    text-shadow:
+      6px 6px 0 #101010,
+      -2px -2px 0 #414445;
+  }
+  .home-head .en-name {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.5rem; letter-spacing: 8px; color: var(--text-dim);
+    margin-bottom: 18px;
+  }
+  .home-head h1 {
     display: inline-block;
-    margin: 0 8px 12px;
-    padding: 10px 24px;
-    border: 1px solid #e8c4b8;
-    border-radius: 999px;
-    color: #c96f4a;
-    text-decoration: none;
-    font-size: .95rem;
+    padding: 16px 44px;
+    border: 1px solid #5c6263;
   }
-  .links a:hover { background: #c96f4a; color: #fff; transition: .2s; }
-  footer { margin-top: 48px; font-size: .8rem; color: #c0b4ad; }
+  .home-head .sub {
+    margin-top: 18px; color: var(--text-dim); letter-spacing: 3px; font-size: .95rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 26px;
+  }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+
+  .nav-card {
+    padding: 22px 22px 20px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .nav-card .num {
+    font-family: "ZCOOL QingKe HuangYou", sans-serif;
+    font-size: 1.6rem;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .nav-card h3 {
+    font-family: "ZCOOL QingKe HuangYou", "Noto Sans SC", sans-serif;
+    font-size: 1.15rem;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .nav-card p { color: var(--text-dim); font-size: .78rem; line-height: 1.7; }
+  .nav-card .dot {
+    position: absolute; right: 26px; top: 26px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--panel-light);
+    box-shadow: inset 3px 3px 6px #151517, inset -3px -3px 6px #5c6263;
+  }
+
+  /* ===== 内页标题 ===== */
+  .page-head { margin-bottom: 40px; display: flex; align-items: center; gap: 20px; }
+  .back {
+    background: var(--panel);
+    border: none; cursor: pointer;
+    width: 52px; height: 52px; border-radius: 16px;
+    color: var(--text); font-size: 1.3rem;
+    box-shadow:
+      6px 6px 14px #101010,
+      -6px -6px 14px #414445;
+    transition: all .2s;
+  }
+  .back:hover { color: var(--accent); transform: translateX(-3px); }
+  .page-head h2 {
+    font-family: "ZCOOL QingKe HuangYou", sans-serif;
+    font-size: 2.4rem; letter-spacing: 5px;
+  }
+
+  /* ===== 作品占位卡片 ===== */
+  .work-card {
+    aspect-ratio: 4 / 3;
+    padding: 24px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    cursor: pointer;
+    position: relative;
+  }
+  .work-card .thumb {
+    position: absolute; inset: 20px 20px auto 20px; height: 60%;
+    border-radius: 16px;
+    background: var(--panel-light);
+    box-shadow: inset 4px 4px 10px #1a1d23, inset -4px -4px 10px #333844;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-dim); font-size: .8rem; letter-spacing: 2px;
+  }
+  .work-card h4 {
+    font-family: "ZCOOL QingKe HuangYou", sans-serif;
+    font-size: 1.15rem; letter-spacing: 2px; margin-top: auto;
+  }
+  .work-card span { color: var(--text-dim); font-size: .8rem; margin-top: 6px; }
+
+  /* ===== 杂志目录风作品列表 ===== */
+  .work-list { display: flex; flex-direction: column; gap: 16px; }
+  .work-row {
+    background: var(--panel);
+    border-radius: 20px;
+    padding: 24px 28px;
+    display: flex; align-items: center; gap: 22px;
+    box-shadow: 10px 10px 20px #101010, -10px -10px 20px #414445;
+    transition: all .25s ease;
+    cursor: pointer;
+  }
+  .work-row:hover {
+    transform: translateX(8px);
+    box-shadow: 14px 14px 26px #101010, -10px -10px 20px #414445, 0 0 20px rgba(244,114,182,.15);
+  }
+  .work-row .no {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.6rem; font-weight: 700; color: #5c6263;
+    width: 44px;
+    transition: color .25s;
+  }
+  .work-row:hover .no { color: var(--accent); }
+  .work-row .name {
+    font-family: "ZCOOL QingKe HuangYou", sans-serif;
+    font-size: 1.2rem; letter-spacing: 2px; flex: 1;
+  }
+  .work-row .cat { color: var(--text-dim); font-size: .82rem; letter-spacing: 1px; }
+  .work-row .arrow { color: #5c6263; font-size: 1.1rem; transition: all .25s; }
+  .work-row:hover .arrow { color: var(--accent); transform: translateX(4px); }
+
+  /* ===== 文件夹形状（内嵌作品图） ===== */
+  .folder-card {
+    position: relative;
+    background: var(--panel);
+    border-radius: 4px 18px 18px 18px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 6px 8px 14px rgba(0,0,0,.45);
+    transition: all .25s ease;
+  }
+  .folder-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; z-index: 2;
+    width: 42%; height: 14px;
+    background: var(--panel-light);
+    border-radius: 4px 10px 0 0;
+  }
+  .folder-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 8px 12px 18px rgba(0,0,0,.5), -3px -3px 8px rgba(65,68,69,.35), 0 0 22px rgba(255,110,199,.15);
+  }
+  .fc-img {
+    margin-top: 14px;
+    aspect-ratio: 4/3;
+    background: var(--panel-light);
+    display: flex; flex-direction: column; gap: 6px;
+    align-items: center; justify-content: center;
+    color: #5c6263; letter-spacing: 2px; font-size: .8rem;
+  }
+  .fc-img small { font-size: .7rem; color: #5c6263; letter-spacing: 1px; }
+  .fc-info { padding: 18px 22px 22px; }
+  .folder-card .no {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.1rem; font-weight: 700; color: #5c6263; margin-bottom: 8px;
+  }
+  .folder-card h4 {
+    font-family: "ZCOOL QingKe HuangYou", sans-serif;
+    font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 6px;
+  }
+  .folder-card p { color: var(--text-dim); font-size: .8rem; }
+
+  /* ===== 首页顶部装饰线 ===== */
+  .topline {
+    display: flex; justify-content: space-between; align-items: center;
+    color: #5c6263; font-size: .72rem; letter-spacing: 4px;
+    padding-bottom: 16px; margin-bottom: 46px;
+    border-bottom: 1px solid #414445;
+  }
+  .home-deco {
+    color: #5c6263; font-size: 1.1rem; letter-spacing: 8px;
+    text-align: center; margin-top: 10px;
+  }
+
+  /* ===== 作品详情页 ===== */
+  .detail-layout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; }
+  @media (max-width: 720px) { .detail-layout { grid-template-columns: 1fr; } }
+  .detail-img {
+    border-radius: 20px;
+    aspect-ratio: 4/3;
+    display: flex; flex-direction: column; gap: 8px;
+    align-items: center; justify-content: center;
+    color: var(--text-dim); letter-spacing: 2px;
+    font-size: .9rem;
+  }
+  .detail-info { padding: 30px; border-radius: 20px; background: var(--panel);
+    box-shadow: 10px 10px 20px #101010, -10px -10px 20px #414445; }
+  .info-row { padding: 14px 0; border-bottom: 1px solid #414445; }
+  .info-row:last-child { border-bottom: none; }
+  .info-row span {
+    display: block; color: var(--text-dim); font-size: .75rem;
+    letter-spacing: 2px; margin-bottom: 6px;
+  }
+  .info-row b { font-weight: 500; line-height: 1.8; }
+
+  /* ===== 关于我：可展开文件夹条目 ===== */
+  .folder-item {
+    position: relative;
+    background: var(--panel);
+    border-radius: 4px 18px 18px 18px;
+    margin-bottom: 22px;
+    box-shadow: 10px 10px 20px #101010, -10px -10px 20px #414445;
+  }
+  .folder-item::before {
+    content: '';
+    position: absolute;
+    top: -12px; left: 0;
+    width: 42%; height: 12px;
+    background: var(--panel-light);
+    border-radius: 8px 8px 0 0;
+  }
+  .folder-head {
+    display: flex; align-items: center; gap: 20px;
+    padding: 24px 28px; cursor: pointer;
+  }
+  .f-no {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.4rem; font-weight: 700; color: #5c6263; width: 36px;
+  }
+  .folder-head .f-name {
+    font-family: "ZCOOL QingKe HuangYou", sans-serif;
+    font-size: 1.2rem; letter-spacing: 2px; flex: 1;
+  }
+  .f-arrow {
+    color: var(--text-dim); font-size: 1.3rem;
+    transition: transform .3s;
+  }
+  .folder-item.open .f-arrow { transform: rotate(45deg); color: var(--accent); }
+  .folder-item.open .f-no { color: var(--accent); }
+  .f-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height .35s ease;
+  }
+  .folder-item.open .f-body { max-height: 300px; }
+  .f-body p {
+    padding: 0 28px 26px 84px;
+    color: #8f9295; line-height: 2; font-size: .92rem;
+  }
+  .contact-list { padding: 4px 28px 24px 84px; }
+  .contact-row {
+    display: flex; gap: 18px; align-items: baseline;
+    padding: 7px 0;
+  }
+  .contact-row .k {
+    width: 92px; flex-shrink: 0;
+    color: #5c6263; font-size: .75rem; letter-spacing: 1px;
+  }
+  .contact-row .v { color: #d5d5da; font-size: .92rem; }
+
+  /* ===== 首页封面：四角角标 ===== */
+  .cover { position: relative; padding: 20px 0; }
+  .corner {
+    position: absolute; width: 22px; height: 22px;
+    border-color: #5c6263; border-style: solid;
+  }
+  .corner.tl { top: 0; left: 0; border-width: 1px 0 0 1px; }
+  .corner.tr { top: 0; right: 0; border-width: 1px 1px 0 0; }
+  .corner.bl { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
+  .corner.br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+  .cover-bottom {
+    display: flex; justify-content: space-between;
+    color: #5c6263; font-size: .7rem; letter-spacing: 3px;
+    margin-top: 50px;
+  }
+
+  /* ===== 封面本体 = 一个大文件夹 ===== */
+  .cover-folder {
+    position: relative;
+    background: rgba(255,255,255,.12);
+    border-radius: 6px 24px 24px 24px;
+    padding: 54px 36px 38px;
+    box-shadow: 10px 14px 28px rgba(0,0,0,.35);
+  }
+  .cover-folder::before {
+    content: ''; position: absolute; top: -18px; left: 0;
+    width: 32%; height: 18px;
+    background: rgba(255,255,255,.07);
+    border-radius: 10px 10px 0 0;
+  }
+  .folder-top-row {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+  .en-big {
+    font-family: "Space Grotesk", sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(1.7rem, 5vw, 2.8rem);
+    letter-spacing: 1px;
+    color: var(--text);
+    line-height: 1;
+  }
+  .folder-tagline {
+    color: var(--text-dim); font-size: .78rem; letter-spacing: 3px;
+    margin-top: 12px;
+  }
+  .name-box {
+    font-family: "ZCOOL QingKe HuangYou", sans-serif;
+    font-size: 2.4rem; letter-spacing: 8px;
+    padding: 10px 32px;
+    background: #8f9295;
+    color: #17171a;
+  }
+
+  /* ===== 拼贴装饰：星星 / 宝石 / 文件夹剪影 / 夹子 ===== */
+  .deco-star { position: absolute; color: #5c6263; pointer-events: none; user-select: none; }
+  .deco-star.pink { color: rgba(255,110,199,.4); }
+  .big-star {
+    position: absolute; color: #5c6263;
+    font-size: 48px; pointer-events: none; user-select: none;
+    opacity: .6;
+  }
+  .big-star.pink { color: rgba(255,110,199,.5); }
+  .deco-gem {
+    position: absolute; width: 10px; height: 10px;
+    background: #5c6263; transform: rotate(45deg);
+    pointer-events: none;
+  }
+  .deco-gem.pink { background: rgba(244,114,182,.35); }
+  .folder-silhouette {
+    position: absolute; right: 50%; transform: translateX(50%);
+    bottom: 30px;
+    width: min(520px, 90%); height: 300px;
+    background: rgba(255,255,255,.03);
+    border-radius: 6px 24px 24px 24px;
+    pointer-events: none;
+  }
+  .folder-silhouette::before {
+    content: ''; position: absolute; top: -18px; left: 0;
+    width: 38%; height: 18px;
+    background: rgba(255,255,255,.03);
+    border-radius: 10px 10px 0 0;
+  }
+  .clip {
+    position: absolute; top: -16px; right: 70px;
+    width: 46px; height: 26px;
+    background: #0d0d0f;
+    border-radius: 3px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,.5);
+  }
+  .clip::after {
+    content: ''; position: absolute; left: 50%;
+    transform: translateX(-50%);
+    bottom: -22px;
+    width: 24px; height: 22px;
+    border: 2px solid #5c6263;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+  }
+
+  footer {
+    text-align: center; margin-top: 64px;
+    color: var(--text-dim); font-size: .8rem; letter-spacing: 3px;
+  }
 </style>
 </head>
 <body>
-  <div class="card">
-    <h1>你的名字</h1>
-    <div class="sub">视觉传达设计 · 杭州</div>
-    <p class="bio">你好，我是一名视觉传达专业学生。<br>喜欢海报、插画和一切好看的东西。<br>这里是我的线上小角落。</p>
-    <div class="links">
-      <a href="#">作品集</a>
-      <a href="#">小红书</a>
-      <a href="#">微店</a>
+
+<!-- ============ 第一层：首页 ============ -->
+<div class="screen active" id="screen-home">
+  <div class="inner">
+    <div class="topline">
+      <span>DESIGN PORTFOLIO</span>
+      <span>(2026)</span>
     </div>
-    <footer>© 2026 你的名字 · Powered by GitHub Pages</footer>
+
+    <div class="cover">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+
+      <div class="big-star pink" style="top: 60px; right: 20px;">★</div>
+      <div class="big-star" style="bottom: 100px; left: 10px; font-size: 28px;">★</div>
+
+      <div class="cover-folder">
+        <div class="folder-top-row">
+          <div>
+            <div class="en-big">SHERRISEOK</div>
+            <div class="folder-tagline">VISUAL DESIGN · 杭州</div>
+          </div>
+          <div class="name-box">李思睿</div>
+        </div>
+
+        <div class="grid">
+          <div class="neu nav-card" onclick="show('works')">
+            <div class="dot"></div>
+            <div class="num">01</div>
+            <h3>作品集</h3>
+            <p>品牌设计 / 品牌插画 / 运营设计 / 字体与其它</p>
+          </div>
+          <div class="neu nav-card" onclick="show('about')">
+            <div class="dot"></div>
+            <div class="num">02</div>
+            <h3>关于我</h3>
+            <p>设计经历 / 技能 / 联系方式</p>
+          </div>
+          <div class="neu nav-card" onclick="window.open('https://xhslink.cn/o/7FuXu7sZ0Je','_blank')">
+            <div class="dot"></div>
+            <div class="num">03</div>
+            <h3>小红书</h3>
+            <p>4.6w+ 赞与收藏 / 设计日常与作品更新</p>
+          </div>
+          <div class="neu nav-card" onclick="alert('邮箱：待补充～')">
+            <div class="dot"></div>
+            <div class="num">04</div>
+            <h3>联系我</h3>
+            <p>邮箱 / 合作咨询</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cover-bottom">
+        <span>DESIGN PROJECT COLLECTION</span>
+        <span>@2026</span>
+        <span>PERSONAL CASE</span>
+      </div>
+    </div>
+
+    <footer>© 2026 SHERRISEOK · MADE WITH GITHUB PAGES</footer>
   </div>
+</div>
+
+<!-- ============ 第二层：作品分类 ============ -->
+<div class="screen" id="screen-works">
+  <div class="inner">
+    <div class="page-head">
+      <button class="back" onclick="show('home')">←</button>
+      <h2>作品集</h2>
+    </div>
+    <div class="grid">
+      <div class="neu nav-card" onclick="openCat('品牌设计','BRAND DESIGN')">
+        <div class="num">A</div>
+        <h3>品牌设计</h3>
+        <p>Logo / VI / 视觉系统</p>
+      </div>
+      <div class="neu nav-card" onclick="openCat('品牌插画','ILLUSTRATION')">
+        <div class="num">B</div>
+        <h3>品牌插画</h3>
+        <p>IP / 包装 / 文创</p>
+      </div>
+      <div class="neu nav-card" onclick="openCat('运营设计','OPERATION')">
+        <div class="num">C</div>
+        <h3>运营设计</h3>
+        <p>海报 / Banner / 活动视觉</p>
+      </div>
+      <div class="neu nav-card" onclick="openCat('字体设计与其它','TYPOGRAPHY')">
+        <div class="num">D</div>
+        <h3>字体设计 / 其它</h3>
+        <p>字体实验 / 平面作业</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 第三层：分类下的作品列表 ============ -->
+<div class="screen" id="screen-category">
+  <div class="inner">
+    <div class="page-head">
+      <button class="back" onclick="show('works')">←</button>
+      <h2 id="cat-title">品牌设计</h2>
+    </div>
+    <div class="grid">
+      <div class="folder-card" onclick="openDetail('项目 01')">
+        <div class="fc-img">作品图占位<small>上传图片后显示在这里</small></div>
+        <div class="fc-info">
+          <div class="no">01</div>
+          <h4>项目名称</h4>
+          <p>2025 · 品牌设计</p>
+        </div>
+      </div>
+      <div class="folder-card" onclick="openDetail('项目 02')">
+        <div class="fc-img">作品图占位<small>上传图片后显示在这里</small></div>
+        <div class="fc-info">
+          <div class="no">02</div>
+          <h4>项目名称</h4>
+          <p>2025 · 品牌设计</p>
+        </div>
+      </div>
+      <div class="folder-card" onclick="openDetail('项目 03')">
+        <div class="fc-img">作品图占位<small>上传图片后显示在这里</small></div>
+        <div class="fc-info">
+          <div class="no">03</div>
+          <h4>项目名称</h4>
+          <p>2025 · 品牌设计</p>
+        </div>
+      </div>
+      <div class="folder-card" onclick="openDetail('项目 04')">
+        <div class="fc-img">作品图占位<small>上传图片后显示在这里</small></div>
+        <div class="fc-info">
+          <div class="no">04</div>
+          <h4>项目名称</h4>
+          <p>2025 · 品牌设计</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 作品详情 ============ -->
+<div class="screen" id="screen-detail">
+  <div class="inner">
+    <div class="page-head">
+      <button class="back" onclick="show('category')">←</button>
+      <h2 id="detail-title">项目名称</h2>
+    </div>
+    <div class="detail-layout">
+      <div class="neu detail-img">
+        作品图占位
+        <small style="color:#5c6263; font-size:.75rem;">上传设计图后替换这里</small>
+      </div>
+      <div class="detail-info">
+        <div class="info-row">
+          <span>时间 TIME</span>
+          <b>2025</b>
+        </div>
+        <div class="info-row">
+          <span>角色 ROLE</span>
+          <b>视觉设计 / 独立完成</b>
+        </div>
+        <div class="info-row">
+          <span>工具 TOOLS</span>
+          <b>Photoshop · Illustrator</b>
+        </div>
+        <div class="info-row">
+          <span>说明 DESCRIPTION</span>
+          <b style="display:block; color:#8f9295; font-weight:400;">项目介绍文字待补充……这里写项目背景、设计思路、你负责的部分。</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 关于我 ============ -->
+<div class="screen" id="screen-about">
+  <div class="inner">
+    <div class="page-head">
+      <button class="back" onclick="show('home')">←</button>
+      <h2>关于我</h2>
+    </div>
+
+    <div class="neu" style="padding: 44px 38px; margin-bottom: 26px;">
+      <div style="color: var(--accent); letter-spacing: 4px; font-size: .85rem; margin-bottom: 16px;">HELLO</div>
+      <h3 style="font-family: 'ZCOOL QingKe HuangYou', sans-serif; font-size: 1.9rem; letter-spacing: 3px; margin-bottom: 18px;">你好，我是李思睿</h3>
+      <p style="color: #8f9295; line-height: 2.1; font-size: .98rem;">
+        视觉传达设计专业大二在读，坐标杭州。<br>
+        喜欢海报、插画和文创，平时在小红书分享设计日常，累计 4.6w+ 赞与收藏。<br>
+        正在准备新的作品集，欢迎交流与合作。
+      </p>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <div class="folder-item">
+        <div class="folder-head" onclick="toggleFolder(this)">
+          <div class="f-no">A</div>
+          <div class="f-name">教育经历</div>
+          <div class="f-arrow">+</div>
+        </div>
+        <div class="f-body">
+          <p>2024 — 至今 · 视觉传达设计专业本科在读<br>坐标杭州，主修品牌、插画与排版。</p>
+        </div>
+      </div>
+
+      <div class="folder-item">
+        <div class="folder-head" onclick="toggleFolder(this)">
+          <div class="f-no">B</div>
+          <div class="f-name">软件技能</div>
+          <div class="f-arrow">+</div>
+        </div>
+        <div class="f-body">
+          <p>Photoshop · Illustrator · Procreate<br>排版与字体设计 · 基础视频剪辑</p>
+        </div>
+      </div>
+
+      <div class="folder-item">
+        <div class="folder-head" onclick="toggleFolder(this)">
+          <div class="f-no">C</div>
+          <div class="f-name">设计方向</div>
+          <div class="f-arrow">+</div>
+        </div>
+        <div class="f-body">
+          <p>品牌视觉 / 文创插画 / 运营海报<br>持续探索字体与图形实验。</p>
+        </div>
+      </div>
+
+      <div class="folder-item">
+        <div class="folder-head" onclick="toggleFolder(this)">
+          <div class="f-no">D</div>
+          <div class="f-name">联系方式</div>
+          <div class="f-arrow">+</div>
+        </div>
+        <div class="f-body">
+          <div class="contact-list">
+            <div class="contact-row"><span class="k">邮箱 EMAIL</span><span class="v">待补充</span></div>
+            <div class="contact-row"><span class="k">微信 WECHAT</span><span class="v">待补充</span></div>
+            <div class="contact-row"><span class="k">手机 PHONE</span><span class="v">待补充</span></div>
+            <div class="contact-row"><span class="k">小红书 XHS</span><span class="v">@sherriseok · 4.6w+ 赞与收藏</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  function openCat(title) {
+    document.getElementById('cat-title').textContent = title;
+    show('category');
+  }
+  function openDetail(title) {
+    document.getElementById('detail-title').textContent = title;
+    show('detail');
+  }
+  function toggleFolder(el) {
+    el.parentElement.classList.toggle('open');
+  }
+</script>
 </body>
 </html>
