@@ -94,6 +94,12 @@
     font-size: 1.6rem;
     color: var(--accent);
     margin-bottom: 8px;
+    transition: all .3s ease;
+    opacity: .6;
+  }
+  .nav-card:hover .num {
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(255,110,199,.4);
   }
   .nav-card h3 {
     font-family: "ZCOOL QingKe HuangYou", "Noto Sans SC", sans-serif;
@@ -214,6 +220,11 @@
   .folder-card .no {
     font-family: "Space Grotesk", sans-serif;
     font-size: 1.1rem; font-weight: 700; color: #5c6263; margin-bottom: 8px;
+    transition: all .3s ease;
+  }
+  .folder-card:hover .no {
+    color: var(--accent);
+    text-shadow: 0 0 8px rgba(255,110,199,.3);
   }
   .folder-card h4 {
     font-family: "ZCOOL QingKe HuangYou", sans-serif;
@@ -414,6 +425,34 @@
     text-align: center; margin-top: 64px;
     color: var(--text-dim); font-size: .8rem; letter-spacing: 3px;
   }
+  /* about 卡片：窄屏上下，宽屏左右 */
+  .about-card {
+    padding: 32px;
+    margin-bottom: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .about-img {
+    width: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 6px 6px 14px #101111, -4px -4px 10px #323536;
+  }
+  .about-text { flex: 1; }
+  @media (min-width: 720px) {
+    .about-card {
+      flex-direction: row;
+      align-items: center;
+      gap: 36px;
+    }
+    .about-img {
+      width: 240px;
+      height: 300px;
+      flex-shrink: 0;
+      object-position: center top;
+    }
+  }
 </style>
 </head>
 <body>
@@ -463,11 +502,11 @@
             <h3>小红书</h3>
             <p>4.6w+ 赞与收藏 / 设计日常与作品更新</p>
           </div>
-          <div class="neu nav-card" onclick="alert('邮箱：待补充～')">
+          <div class="neu nav-card" onclick="window.location.href='mailto:2298374046@qq.com'">
             <div class="dot"></div>
             <div class="num">04</div>
             <h3>联系我</h3>
-            <p>邮箱 / 合作咨询</p>
+            <p>2298374046@qq.com</p>
           </div>
         </div>
       </div>
@@ -491,25 +530,25 @@
       <h2>作品集</h2>
     </div>
     <div class="grid">
-      <div class="neu nav-card" onclick="openCat('品牌设计','BRAND DESIGN')">
+      <div class="neu nav-card" onclick="openCat('文创产品设计','MERCHANDISE')">
         <div class="num">A</div>
-        <h3>品牌设计</h3>
-        <p>Logo / VI / 视觉系统</p>
+        <h3>文创产品设计</h3>
+        <p>卡套 / 护照夹 / 周边实物</p>
       </div>
-      <div class="neu nav-card" onclick="openCat('品牌插画','ILLUSTRATION')">
+      <div class="neu nav-card" onclick="openCat('美工设计','POSTER')">
         <div class="num">B</div>
-        <h3>品牌插画</h3>
-        <p>IP / 包装 / 文创</p>
+        <h3>美工设计</h3>
+        <p>活动视觉 / 人生四格宣图</p>
       </div>
-      <div class="neu nav-card" onclick="openCat('运营设计','OPERATION')">
+      <div class="neu nav-card" onclick="openCat('标志设计','LOGO')">
         <div class="num">C</div>
-        <h3>运营设计</h3>
-        <p>海报 / Banner / 活动视觉</p>
+        <h3>标志设计</h3>
+        <p>应援LOGO / 商业标识</p>
       </div>
-      <div class="neu nav-card" onclick="openCat('字体设计与其它','TYPOGRAPHY')">
+      <div class="neu nav-card" onclick="openCat('绘画作品','ILLUSTRATION')">
         <div class="num">D</div>
-        <h3>字体设计 / 其它</h3>
-        <p>字体实验 / 平面作业</p>
+        <h3>绘画作品</h3>
+        <p>贴纸 / 棉花娃娃 / 像素艺术</p>
       </div>
     </div>
   </div>
@@ -567,9 +606,8 @@
       <h2 id="detail-title">项目名称</h2>
     </div>
     <div class="detail-layout">
-      <div class="neu detail-img">
-        作品图占位
-        <small style="color:#5c6263; font-size:.75rem;">上传设计图后替换这里</small>
+      <div class="neu detail-img" id="detail-box">
+        <small style="color:#5c6263; font-size:.75rem;">作品图片</small>
       </div>
       <div class="detail-info">
         <div class="info-row">
@@ -601,14 +639,17 @@
       <h2>关于我</h2>
     </div>
 
-    <div class="neu" style="padding: 44px 38px; margin-bottom: 26px;">
-      <div style="color: var(--accent); letter-spacing: 4px; font-size: .85rem; margin-bottom: 16px;">HELLO</div>
-      <h3 style="font-family: 'ZCOOL QingKe HuangYou', sans-serif; font-size: 1.9rem; letter-spacing: 3px; margin-bottom: 18px;">你好，我是李思睿</h3>
-      <p style="color: #8f9295; line-height: 2.1; font-size: .98rem;">
-        视觉传达设计专业大二在读，坐标杭州。<br>
-        喜欢海报、插画和文创，平时在小红书分享设计日常，累计 4.6w+ 赞与收藏。<br>
-        正在准备新的作品集，欢迎交流与合作。
-      </p>
+    <div class="neu about-card">
+      <img src="me.jpg" alt="李思睿" class="about-img">
+      <div class="about-text">
+        <div style="color: var(--accent); letter-spacing: 4px; font-size: .85rem; margin-bottom: 12px;">HELLO</div>
+        <h3 style="font-family: 'ZCOOL QingKe HuangYou', sans-serif; font-size: 1.9rem; letter-spacing: 3px; margin-bottom: 14px;">你好，我是李思睿</h3>
+        <p style="color: #8f9295; line-height: 2.1; font-size: .98rem;">
+          浙江理工大学视觉传达设计本科在读，求职方向文创产品 / UI 设计。<br>
+          有多次文创销售项目全流程经验，从插画到实物落地都能独立完成。<br>
+          欢迎交流与合作。
+        </p>
+      </div>
     </div>
 
     <div style="margin-top: 30px;">
@@ -619,7 +660,7 @@
           <div class="f-arrow">+</div>
         </div>
         <div class="f-body">
-          <p>2024 — 至今 · 视觉传达设计专业本科在读<br>坐标杭州，主修品牌、插画与排版。</p>
+          <p>2024 — 2028 · 浙江理工大学<br>视觉传达设计 · 本科在读 · GPA 3.33/4.0<br>主修：品牌 / 包装 / 插画 / 版式 / UI / 数字媒体</p>
         </div>
       </div>
 
@@ -630,7 +671,7 @@
           <div class="f-arrow">+</div>
         </div>
         <div class="f-body">
-          <p>Photoshop · Illustrator · Procreate<br>排版与字体设计 · 基础视频剪辑</p>
+          <p>Illustrator · Photoshop · Blender · Medibang<br>强动手能力，可独立完成从插画到实物落地。</p>
         </div>
       </div>
 
@@ -641,7 +682,7 @@
           <div class="f-arrow">+</div>
         </div>
         <div class="f-body">
-          <p>品牌视觉 / 文创插画 / 运营海报<br>持续探索字体与图形实验。</p>
+          <p>求职意向：文创产品设计 / UI 设计<br>擅长：周边产品落地、活动视觉、插画与应援LOGO<br>有多次文创销售项目全流程经验（200~1200+ 人定制）</p>
         </div>
       </div>
 
@@ -653,11 +694,31 @@
         </div>
         <div class="f-body">
           <div class="contact-list">
-            <div class="contact-row"><span class="k">邮箱 EMAIL</span><span class="v">待补充</span></div>
-            <div class="contact-row"><span class="k">微信 WECHAT</span><span class="v">待补充</span></div>
-            <div class="contact-row"><span class="k">手机 PHONE</span><span class="v">待补充</span></div>
-            <div class="contact-row"><span class="k">小红书 XHS</span><span class="v">@sherriseok · 4.6w+ 赞与收藏</span></div>
+            <div class="contact-row"><span class="k">邮箱 EMAIL</span><span class="v">2298374046@qq.com</span></div>
+            <div class="contact-row"><span class="k">微信 WECHAT</span><span class="v">Sherr1s_e0k</span></div>
+            <div class="contact-row"><span class="k">小红书 XHS</span><span class="v">Sherris_eok · 5589507829</span></div>
           </div>
+        </div>
+      </div>
+
+      <div class="folder-item">
+        <div class="folder-head" onclick="toggleFolder(this)">
+          <div class="f-no">E</div>
+          <div class="f-name">个人经历</div>
+          <div class="f-arrow">+</div>
+        </div>
+        <div class="f-body">
+          <p>
+            <b style="color:#bec0c2;">2025.10 — 2025.11</b><br>
+            杭州青壹坊文化创意设计有限公司 · 二次元产品设计师<br><br>
+            <b style="color:#bec0c2;">2025.08 — 2026.01</b><br>
+            百级活动主视觉设计 · 视觉传达设计师<br><br>
+            <b style="color:#bec0c2;">2024.06 — 2025.08</b><br>
+            千级文创产品销售 · 文创设计师 / 美工 / 策划<br>
+            独立负责产品设计与宣传，统筹 200~1200+ 人定制需求<br><br>
+            <b style="color:#bec0c2;">校园</b><br>
+            独立负责运动会、音乐节等校园活动海报与物料
+          </p>
         </div>
       </div>
     </div>
@@ -672,10 +733,59 @@
   }
   function openCat(title) {
     document.getElementById('cat-title').textContent = title;
+    const works = {
+      '文创产品设计': [
+        ['原创卡套设计', '2025 · RIIZE 成员主题'],
+        ['护照夹设计', '2025 · WISH 系列'],
+        ['青苹果系列周边', '2025 · 卡套 / 护照夹'],
+      ],
+      '美工设计': [
+        ['冬之星轨 · 门票设计', '2026 · 上海ESONLY', 'eso.jpg'],
+        ['冬之星轨 · 主视觉海报', '2026 · Frost Constellation', 'eso_poster.jpg'],
+        ['人生四格宣图 01', '2025 · JUSTFOTO · 恋爱物语', 'jft1.jpg'],
+        ['人生四格宣图 02', '2025 · JUSTFOTO · Eunseok属性', 'jft2.jpg'],
+        ['人生四格宣图 03', '2025 · JUSTFOTO', 'jft3.jpg'],
+      ],
+      '标志设计': [
+        ['粉丝应援 LOGO', '2025 · NCT WISH / RIIZE'],
+        ['商业标识系统', '2025 · 证件照 / 面试区品牌'],
+      ],
+      '绘画作品': [
+        ['同人贴纸页', '2025 · RIIZE 角色贴纸 sheet'],
+        ['棉花娃娃人设', '2025 · Q版形象 / 实体娃娃'],
+        ['像素艺术场景', '2025 · 等距视角寿司店 / 饮品店'],
+      ],
+    };
+    const list = works[title] || [];
+    const grid = document.querySelector('#screen-category .grid');
+    grid.innerHTML = list.map((w, i) => `
+      <div class="folder-card" onclick="openDetail('${w[0]}')">
+        <div class="fc-img">${w[2] ? `<img src="${w[2]}" style="width:100%;height:100%;object-fit:cover;object-position:center 35%;border-radius:14px 14px 0 0;">` : '作品图占位<small>上传图片后显示在这里</small>'}</div>
+        <div class="fc-info">
+          <div class="no">${String(i+1).padStart(2,'0')}</div>
+          <h4>${w[0]}</h4>
+          <p>${w[1]}</p>
+        </div>
+      </div>
+    `).join('');
     show('category');
   }
+  const workImages = {
+    '冬之星轨 · 门票设计': ['eso.jpg'],
+    '冬之星轨 · 主视觉海报': ['eso_poster.jpg', 'eso_info1.jpg', 'eso_info2.jpg'],
+    '人生四格宣图 01': ['jft1.jpg'],
+    '人生四格宣图 02': ['jft2.jpg'],
+    '人生四格宣图 03': ['jft3.jpg'],
+  };
   function openDetail(title) {
     document.getElementById('detail-title').textContent = title;
+    const imgs = workImages[title] || [];
+    const box = document.getElementById('detail-box');
+    if (imgs.length) {
+      box.innerHTML = imgs.map(src => `<img src="${src}" style="width:100%;border-radius:18px;margin-bottom:20px;box-shadow:6px 6px 14px #101111, -4px -4px 10px #323536;">`).join('');
+    } else {
+      box.innerHTML = '<p style="color:#8f9295;line-height:2">作品图片待上传～</p>';
+    }
     show('detail');
   }
   function toggleFolder(el) {
