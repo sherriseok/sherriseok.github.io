@@ -113,6 +113,13 @@
     margin-left: 8px;
   }
   .nav-card p { color: var(--text-dim); font-size: .78rem; line-height: 1.7; }
+  .jump {
+    display: inline-flex; align-items: center; gap: 5px;
+    margin-top: 9px; padding: 4px 12px; border-radius: 999px;
+    color: var(--accent); font-size: .7rem; letter-spacing: 1px;
+    background: rgba(255,110,199,.12);
+    border: 1px solid rgba(255,110,199,.32);
+  }
   .nav-card .dot {
     position: absolute; right: 26px; top: 26px;
     width: 14px; height: 14px; border-radius: 50%;
@@ -390,7 +397,7 @@
     border-radius: 10px 10px 0 0;
   }
   .folder-top-row {
-    display: flex; align-items: flex-start; justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between;
     gap: 20px; flex-wrap: wrap;
     margin-bottom: 36px;
   }
@@ -408,12 +415,36 @@
     margin-top: 12px;
   }
   .name-box {
+    position: relative;
     font-family: "ZCOOL QingKe HuangYou", sans-serif;
     font-size: 2.4rem; letter-spacing: 8px;
     padding: 10px 32px;
     background: #8f9295;
     color: #17171a;
+    cursor: pointer; user-select: none;
+    transition: background .2s ease;
   }
+  .name-box.flash { animation: nameFlash .55s ease; }
+  @keyframes nameFlash {
+    0%   { transform: rotateY(0);    color: #17171a; background: #8f9295; }
+    45%  { transform: rotateY(90deg); color: var(--accent); background: #c7a2b6; }
+    100% { transform: rotateY(0);    color: #17171a; background: #8f9295; }
+  }
+  .name-tip {
+    position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(6px);
+    width: max-content; max-width: 240px;
+    background: var(--panel); border: 1px solid rgba(255,110,199,.35);
+    color: var(--text); font-family: "Noto Sans SC", sans-serif;
+    font-size: .82rem; letter-spacing: .5px; line-height: 1.7;
+    padding: 10px 14px; border-radius: 12px; text-align: center;
+    box-shadow: 4px 4px 10px rgba(0,0,0,.35);
+    opacity: 0; pointer-events: none; transition: all .22s ease;
+  }
+  .name-tip::after {
+    content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    border: 7px solid transparent; border-top-color: rgba(255,110,199,.35);
+  }
+  .name-tip.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   /* ===== 拼贴装饰：星星 / 宝石 / 文件夹剪影 / 夹子 ===== */
   .deco-star { position: absolute; color: #5c6263; pointer-events: none; user-select: none; }
@@ -465,6 +496,59 @@
     text-align: center; margin-top: 64px;
     color: var(--text-dim); font-size: .8rem; letter-spacing: 3px;
   }
+
+  /* ===== 面包屑层级导航 ===== */
+  .crumb {
+    display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px;
+    margin-bottom: 30px; padding: 7px 10px;
+    background: var(--panel);
+    border-radius: 999px;
+    box-shadow: inset 3px 3px 8px #191a1a, inset -3px -3px 8px #333535;
+    font-size: .78rem; letter-spacing: 1px;
+  }
+  .crumb-link {
+    cursor: pointer; color: var(--text-dim);
+    padding: 4px 12px; border-radius: 999px;
+    transition: all .2s ease;
+  }
+  .crumb-link:hover { color: var(--accent); background: rgba(255,110,199,.12); }
+  .crumb-sep { color: #5c6263; font-size: .72rem; }
+  .crumb-current {
+    color: var(--accent); font-weight: 500; letter-spacing: 1px;
+    padding: 4px 14px; border-radius: 999px;
+    background: rgba(255,110,199,.14);
+    box-shadow: inset 0 0 0 1px rgba(255,110,199,.28);
+  }
+
+  /* ===== 详情上一件 / 下一件 ===== */
+  .detail-nav { display: flex; justify-content: space-between; gap: 16px; margin-top: 28px; }
+  .detail-nav button {
+    background: var(--panel); border: none; cursor: pointer;
+    color: var(--text); font-family: inherit; font-size: .85rem; letter-spacing: 1px;
+    padding: 14px 22px; border-radius: 16px;
+    box-shadow: 6px 6px 14px #101010, -6px -6px 14px #414445;
+    transition: all .2s;
+  }
+  .detail-nav button:hover:not(:disabled) { color: var(--accent); transform: translateY(-2px); }
+  .detail-nav button:disabled { opacity: .35; cursor: default; }
+
+  /* ===== 图片灯箱 ===== */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(10,10,10,.88);
+    display: none; align-items: center; justify-content: center; padding: 40px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 90%; max-height: 88vh; border-radius: 14px; box-shadow: 0 10px 40px rgba(0,0,0,.6); }
+  .lb-btn {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+    background: rgba(255,255,255,.1); border: none; color: #fff; cursor: pointer;
+    width: 46px; height: 46px; border-radius: 50%; font-size: 1.4rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lb-prev { left: 24px; }
+  .lb-next { right: 24px; }
+  .lb-close { position: absolute; top: 22px; right: 28px; background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; }
   /* about 卡片：窄屏上下，宽屏左右 */
   .about-card {
     padding: 32px;
@@ -493,9 +577,79 @@
       object-position: center top;
     }
   }
+
+  /* ===== 作品集统计 + 分类快捷标签 ===== */
+  .works-meta { color: var(--text-dim); font-size: .8rem; letter-spacing: 1px; margin: -12px 0 18px; }
+  .works-meta b { color: var(--accent); font-weight: 500; }
+
+  /* ===== 回到顶部 ===== */
+  #to-top {
+    position: fixed; right: 28px; bottom: 32px; z-index: 90;
+    width: 48px; height: 48px; border-radius: 16px; border: none; cursor: pointer;
+    background: var(--panel); color: var(--text); font-size: 1.2rem;
+    box-shadow: 6px 6px 14px #101010, -6px -6px 14px #414445;
+    opacity: 0; pointer-events: none; transform: translateY(12px);
+    transition: all .25s ease;
+  }
+  #to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  #to-top:hover { color: var(--accent); }
+
+  /* ===== 全站悬浮语言切换（右上角，单框分段控件） ===== */
+  .lang-switch {
+    position: fixed; top: 20px; right: 24px; z-index: 100;
+    display: flex; gap: 2px; padding: 4px;
+    background: var(--panel); border: 1px solid #414445;
+    border-radius: 999px;
+    box-shadow: 4px 4px 10px rgba(0,0,0,.35);
+  }
+  .lang-switch button {
+    background: transparent; border: none; cursor: pointer;
+    color: var(--text-dim); font-family: "Space Grotesk", "Noto Sans SC", sans-serif;
+    font-size: .78rem; letter-spacing: 1px; padding: 6px 14px; border-radius: 999px;
+    transition: all .2s ease;
+  }
+  .lang-switch button:hover { color: var(--text); }
+  .lang-switch button.active {
+    color: var(--accent);
+    background: rgba(255,110,199,.14);
+    box-shadow: inset 0 0 0 1px rgba(255,110,199,.3);
+  }
+
+  /* ===== 联系方式图标 ===== */
+  .contact-row .k { display: inline-flex; align-items: center; gap: 8px; }
+  .contact-ico {
+    width: 22px; height: 22px; flex-shrink: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--accent);
+  }
+  .contact-ico svg { width: 18px; height: 18px; fill: currentColor; }
+
+  /* ===== 筹备中占位 ===== */
+  .fc-img.placeholder { color: #5c6263; }
+  .fc-img.placeholder .badge {
+    margin-top: 6px; padding: 3px 12px; border-radius: 999px;
+    font-size: .7rem; letter-spacing: 2px; color: var(--text-dim);
+    background: rgba(255,255,255,.05); border: 1px dashed #5c6263;
+  }
+
+  /* ===== 文件夹翻开动效 ===== */
+  .folder-card { transform-origin: top left; }
+  .folder-card.flip::before { transform: rotateX(24deg); }
+  .folder-card.flip { animation: cardIn .3s ease; }
+  @keyframes cardIn {
+    0% { transform: translateY(8px) scale(.98); opacity: .6; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+  }
 </style>
 </head>
 <body>
+
+<!-- 全站悬浮语言切换 -->
+<div class="lang-switch" id="global-lang">
+  <button data-lang="zh" class="active" onclick="setLang('zh')">中文</button>
+  <button data-lang="en" onclick="setLang('en')">EN</button>
+  <button data-lang="ko" onclick="setLang('ko')">한</button>
+</div>
 
 <!-- ============ 第一层：首页 ============ -->
 <div class="screen active" id="screen-home">
@@ -520,33 +674,33 @@
             <div class="en-big">SHERRISEOK</div>
             <div class="folder-tagline">VISUAL DESIGN · 杭州</div>
           </div>
-          <div class="name-box">李思睿</div>
+          <div class="name-box" id="name-box">李思睿<span class="name-tip" id="name-tip"></span></div>
         </div>
 
         <div class="grid">
           <div class="neu nav-card" onclick="show('works')">
             <div class="dot"></div>
             <div class="num">01</div>
-            <h3>作品集<span class="en">PORTFOLIO</span></h3>
-            <p>品牌设计 / 品牌插画 / 运营设计 / 字体与其它</p>
+            <h3 data-i18n="navWorks">作品集<span class="en">PORTFOLIO</span></h3>
+            <p data-i18n-misc="home01">品牌设计 / 品牌插画 / 运营设计 / 字体与其它</p>
           </div>
           <div class="neu nav-card" onclick="show('about')">
             <div class="dot"></div>
             <div class="num">02</div>
-            <h3>关于我<span class="en">ABOUT</span></h3>
-            <p>设计经历 / 技能 / 联系方式</p>
+            <h3 data-i18n="navAbout">关于我<span class="en">ABOUT</span></h3>
+            <p data-i18n-misc="home02">设计经历 / 技能 / 联系方式</p>
           </div>
           <div class="neu nav-card" onclick="window.open('https://xhslink.cn/o/7FuXu7sZ0Je','_blank')">
             <div class="dot"></div>
             <div class="num">03</div>
             <h3>小红书<span class="en">XIAOHONGSHU</span></h3>
-            <p>设计日常与作品更新（点击跳转）</p>
+            <p><span data-i18n-misc="home03">设计日常与作品更新</span><br><span class="jump" data-i18n="jump">↗ 点击跳转</span></p>
           </div>
           <div class="neu nav-card" onclick="window.location.href='mailto:2298374046@qq.com'">
             <div class="dot"></div>
             <div class="num">04</div>
-            <h3>联系我<span class="en">CONTACT</span></h3>
-            <p>2298374046@qq.com（点击跳转）</p>
+            <h3 data-i18n="navContact">联系我<span class="en">CONTACT</span></h3>
+            <p>2298374046@qq.com<br><span class="jump" data-i18n="jump">↗ 点击跳转</span></p>
           </div>
         </div>
       </div>
@@ -565,35 +719,37 @@
 <!-- ============ 第二层：作品分类 ============ -->
 <div class="screen" id="screen-works">
   <div class="inner">
+    <nav class="crumb"></nav>
     <div class="page-head">
       <button class="back" onclick="show('home')">←</button>
-      <h2>作品集</h2>
+      <h2 data-i18n="navWorks">作品集</h2>
     </div>
+    <div class="works-meta" id="works-meta"></div>
     <div class="grid">
       <div class="neu nav-card" onclick="openCat('文创产品设计','MERCHANDISE')">
         <div class="num">A</div>
-        <h3>文创产品设计<span class="en">MERCHANDISE</span></h3>
-        <p>卡套 / 护照夹 / 周边实物</p>
+        <h3 data-i18n-cat="文创产品设计">文创产品设计<span class="en">MERCHANDISE</span></h3>
+        <p data-i18n-misc="catWenchuang">卡套 / 护照夹 / 周边实物</p>
       </div>
       <div class="neu nav-card" onclick="openCat('美工设计','POSTER')">
         <div class="num">B</div>
-        <h3>美工设计<span class="en">POSTER</span></h3>
-        <p>活动视觉 / 人生四格宣图</p>
+        <h3 data-i18n-cat="美工设计">美工设计<span class="en">POSTER</span></h3>
+        <p data-i18n-misc="catMeigong">活动视觉 / 人生四格宣图</p>
       </div>
       <div class="neu nav-card" onclick="openCat('标志设计','LOGO')">
         <div class="num">C</div>
-        <h3>标志设计<span class="en">LOGO</span></h3>
-        <p>商业标识 / 活动标识</p>
+        <h3 data-i18n-cat="标志设计">标志设计<span class="en">LOGO</span></h3>
+        <p data-i18n-misc="catLogo">商业标识 / 活动标识</p>
       </div>
       <div class="neu nav-card" onclick="openCat('绘画作品','ILLUSTRATION')">
         <div class="num">D</div>
-        <h3>绘画作品<span class="en">ILLUSTRATION</span></h3>
-        <p>贴纸 / 像素创作</p>
+        <h3 data-i18n-cat="绘画作品">绘画作品<span class="en">ILLUSTRATION</span></h3>
+        <p data-i18n-misc="catHuihua">贴纸 / 像素创作</p>
       </div>
       <div class="neu nav-card" onclick="openCat('手工作品','HANDICRAFT')">
         <div class="num">E</div>
-        <h3>手工作品<span class="en">HANDICRAFT</span></h3>
-        <p>钩针 / 刺绣等手工</p>
+        <h3 data-i18n-cat="手工作品">手工作品<span class="en">HANDICRAFT</span></h3>
+        <p data-i18n-misc="catShougong">钩针 / 刺绣等手工</p>
       </div>
     </div>
   </div>
@@ -602,6 +758,7 @@
 <!-- ============ 第三层：分类下的作品列表 ============ -->
 <div class="screen" id="screen-category">
   <div class="inner">
+    <nav class="crumb"></nav>
     <div class="page-head">
       <button class="back" onclick="show('works')">←</button>
       <h2 id="cat-title">品牌设计</h2>
@@ -646,6 +803,7 @@
 <!-- ============ 作品详情 ============ -->
 <div class="screen" id="screen-detail">
   <div class="inner">
+    <nav class="crumb"></nav>
     <div class="page-head">
       <button class="back" onclick="show('category')">←</button>
       <h2 id="detail-title">项目名称</h2>
@@ -656,22 +814,26 @@
       </div>
       <div class="detail-info">
         <div class="info-row">
-          <span>时间 TIME</span>
+          <span data-i18n="labelTime">时间 TIME</span>
           <b id="detail-time">2025</b>
         </div>
         <div class="info-row">
-          <span>角色 ROLE</span>
+          <span data-i18n="labelRole">角色 ROLE</span>
           <b id="detail-role">视觉设计 / 独立完成</b>
         </div>
         <div class="info-row">
-          <span>工具 TOOLS</span>
+          <span data-i18n="labelTools">工具 TOOLS</span>
           <b id="detail-tools">Photoshop · Illustrator</b>
         </div>
         <div class="info-row">
-          <span>说明 DESCRIPTION</span>
+          <span data-i18n="labelDesc">说明 DESCRIPTION</span>
           <b id="detail-desc" style="display:block; color:#8f9295; font-weight:400;">项目介绍文字待补充……</b>
         </div>
       </div>
+    </div>
+    <div class="detail-nav">
+      <button id="detail-prev" data-i18n="prev" onclick="navigateDetail(-1)">‹ 上一件</button>
+      <button id="detail-next" data-i18n="next" onclick="navigateDetail(1)">下一件 ›</button>
     </div>
   </div>
 </div>
@@ -679,17 +841,18 @@
 <!-- ============ 关于我 ============ -->
 <div class="screen" id="screen-about">
   <div class="inner">
+    <nav class="crumb"></nav>
     <div class="page-head">
       <button class="back" onclick="show('home')">←</button>
-      <h2>关于我</h2>
+      <h2 data-i18n="navAbout">关于我</h2>
     </div>
 
     <div class="neu about-card">
       <img src="me.jpg" alt="李思睿" class="about-img">
       <div class="about-text">
         <div style="color: var(--accent); letter-spacing: 4px; font-size: .85rem; margin-bottom: 12px;">HELLO</div>
-        <h3 style="font-family: 'ZCOOL QingKe HuangYou', sans-serif; font-size: 1.9rem; letter-spacing: 3px; margin-bottom: 14px;">你好，我是李思睿</h3>
-        <p style="color: #8f9295; line-height: 2.1; font-size: .98rem;">
+        <h3 data-i18n-about="name" style="font-family: 'ZCOOL QingKe HuangYou', sans-serif; font-size: 1.9rem; letter-spacing: 3px; margin-bottom: 14px;">你好，我是李思睿</h3>
+        <p data-i18n-about="intro" style="color: #8f9295; line-height: 2.1; font-size: .98rem;">
           浙江理工大学视觉传达设计本科在读，喜欢设计、时尚与发挥创意的事物。<br>
           动手能力强，自学掌握 Illustrator 等软件；爱好钩针、刺绣等手工，学习能力强。<br>
           希望可以学习更多美好有趣的事情！
@@ -701,47 +864,47 @@
       <div class="folder-item">
         <div class="folder-head" onclick="toggleFolder(this)">
           <div class="f-no">A</div>
-          <div class="f-name">教育经历</div>
+          <div class="f-name" data-i18n="edu">教育经历</div>
           <div class="f-arrow">+</div>
         </div>
         <div class="f-body">
-          <p>2024 — 2028 · 浙江理工大学<br>视觉传达设计 · 本科在读 · GPA 3.33/4.0<br>主修：品牌 / 包装 / 插画 / 版式 / UI / 数字媒体</p>
+          <p data-i18n-about="edu">2024 — 2028 · 浙江理工大学<br>视觉传达设计 · 本科在读 · GPA 3.33/4.0<br>主修：品牌 / 包装 / 插画 / 版式 / UI / 数字媒体</p>
         </div>
       </div>
 
       <div class="folder-item">
         <div class="folder-head" onclick="toggleFolder(this)">
           <div class="f-no">B</div>
-          <div class="f-name">软件技能</div>
+          <div class="f-name" data-i18n="skill">软件技能</div>
           <div class="f-arrow">+</div>
         </div>
         <div class="f-body">
-          <p>Illustrator · Photoshop · Blender · Medibang<br>强动手能力，可独立完成从插画到实物落地。</p>
+          <p data-i18n-about="skill">Illustrator · Photoshop · Blender · Medibang<br>强动手能力，可独立完成从插画到实物落地。</p>
         </div>
       </div>
 
       <div class="folder-item">
         <div class="folder-head" onclick="toggleFolder(this)">
           <div class="f-no">C</div>
-          <div class="f-name">设计方向</div>
+          <div class="f-name" data-i18n="direction">设计方向</div>
           <div class="f-arrow">+</div>
         </div>
         <div class="f-body">
-          <p>求职意向：文创产品设计 / UI 设计<br>擅长：周边产品落地、活动视觉、插画与应援LOGO<br>有多次文创销售项目全流程经验（200~1200+ 人定制）</p>
+          <p data-i18n-about="direction">求职意向：文创产品设计 / UI 设计<br>擅长：周边产品落地、活动视觉、插画与应援LOGO<br>有多次文创销售项目全流程经验（200~1200+ 人定制）</p>
         </div>
       </div>
 
       <div class="folder-item">
         <div class="folder-head" onclick="toggleFolder(this)">
           <div class="f-no">D</div>
-          <div class="f-name">联系方式</div>
+          <div class="f-name" data-i18n="contact">联系方式</div>
           <div class="f-arrow">+</div>
         </div>
         <div class="f-body">
           <div class="contact-list">
-            <div class="contact-row"><span class="k">邮箱 EMAIL</span><span class="v">2298374046@qq.com</span></div>
-            <div class="contact-row"><span class="k">微信 WECHAT</span><span class="v">Sherr1s_e0k</span></div>
-            <div class="contact-row"><span class="k">小红书 XHS</span><span class="v">Sherris_eok · 5589507829</span></div>
+            <div class="contact-row"><span class="k"><span class="contact-ico"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 6.5 12 13l8.5-6.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span><span data-i18n="email">邮箱 EMAIL</span></span><span class="v">2298374046@qq.com</span></div>
+            <div class="contact-row"><span class="k"><span class="contact-ico"><svg viewBox="0 0 24 24"><path d="M9.5 3C5.4 3 2 5.9 2 9.5c0 2 1.1 3.8 2.8 4.9L4.3 17l3.3-1.8c.6.2 1.2.3 1.9.3h.3A7.2 7.2 0 0 1 9.5 9.5C9.5 5.9 12.6 3 16.5 3S23 5.9 23 9.5 19.9 16 16 16h-.4c-.7 0-1.3-.1-1.9-.3L10.4 17.5l.5-2.6A7.3 7.3 0 0 0 18 9.5C18 5.9 15.6 3 12.5 3z" fill="none" stroke="currentColor" stroke-width="1.6" transform="translate(-1.5 0) scale(.92)"/></svg></span><span data-i18n="wechat">微信 WECHAT</span></span><span class="v">Sherr1s_e0k</span></div>
+            <div class="contact-row"><span class="k"><span class="contact-ico"><svg viewBox="0 0 24 24"><path d="M6 3h12v18H6z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8h6M9 12h6M9 16h4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span><span data-i18n="xhs">小红书 XHS</span></span><span class="v">Sherris_eok · 5589507829</span></div>
           </div>
         </div>
       </div>
@@ -770,15 +933,126 @@
   </div>
 </div>
 
+<button id="to-top" onclick="backToTop()" aria-label="回到顶部">↑</button>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lb-close" onclick="closeLightbox()">×</button>
+  <button class="lb-btn lb-prev" onclick="event.stopPropagation();lbNav(-1)">‹</button>
+  <img id="lightbox-img" src="" alt="作品大图" draggable="false" onclick="event.stopPropagation()">
+  <button class="lb-btn lb-next" onclick="event.stopPropagation();lbNav(1)">›</button>
+</div>
+
 <script>
+  let currentCat = '', currentCatEn = '', currentTitle = '', currentIdx = 0;
+  let detailImgs = [], lbIdx = 0, hoverCar = null, currentScreen = 'home';
+  const catEn = {
+    '文创产品设计': 'MERCHANDISE', '美工设计': 'POSTER', '标志设计': 'LOGO',
+    '绘画作品': 'ILLUSTRATION', '手工作品': 'HANDICRAFT'
+  };
+  let lang = 'zh';
+  const i18n = {
+    zh: {
+      navHome: '首页', navWorks: '作品集', navAbout: '关于我', navContact: '联系我',
+      labelTime: '时间 TIME', labelRole: '角色 ROLE', labelTools: '工具 TOOLS', labelDesc: '说明 DESCRIPTION',
+      prev: '‹ 上一件', next: '下一件 ›', jump: '↗ 点击跳转', preparing: '筹备中',
+      statCats: '个分类', statWorks: '种作品',
+      edu: '教育经历', skill: '软件技能', direction: '设计方向', contact: '联系方式',
+      email: '邮箱 EMAIL', wechat: '微信 WECHAT', xhs: '小红书 XHS'
+    },
+    en: {
+      navHome: 'Home', navWorks: 'Portfolio', navAbout: 'About', navContact: 'Contact',
+      labelTime: 'Time', labelRole: 'Role', labelTools: 'Tools', labelDesc: 'Description',
+      prev: '‹ Prev', next: 'Next ›', jump: '↗ Open', preparing: 'Coming soon',
+      statCats: 'categories', statWorks: 'works',
+      edu: 'Education', skill: 'Skills', direction: 'Direction', contact: 'Contact',
+      email: 'Email', wechat: 'WeChat', xhs: 'XHS'
+    },
+    ko: {
+      navHome: '홈', navWorks: '포트폴리오', navAbout: '소개', navContact: '연락처',
+      labelTime: '시간 TIME', labelRole: '역할 ROLE', labelTools: '도구 TOOLS', labelDesc: '설명 DESCRIPTION',
+      prev: '‹ 이전 작품', next: '다음 작품 ›', jump: '↗ 바로가기', preparing: '준비중',
+      statCats: '개 분류', statWorks: '개 작품',
+      edu: '학력', skill: '스킬', direction: '디자인 방향', contact: '연락처',
+      email: '이메일 EMAIL', wechat: '위챗 WECHAT', xhs: 'XHS'
+    }
+  };
+  const catKo = {
+    '文创产品设计': '문화상품 디자인', '美工设计': '그래픽 디자인', '标志设计': '로고 디자인',
+    '绘画作品': '회화 작품', '手工作品': '수공예 작품'
+  };
+  const t = key => i18n[lang][key] || key;
+  const catName = c => lang === 'ko' ? (catKo[c] || c) : lang === 'en' ? (catEn[c] || c) : c;
+
   function show(id) {
+    currentScreen = id;
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById('screen-' + id).classList.add('active');
+    renderCrumb(id);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-  function openCat(title, en) {
-    document.getElementById('cat-title').innerHTML = `${title}${en ? `<span class="en">${en}</span>` : ''}`;
-    const works = {
+  function renderCrumb(id) {
+    const nav = document.querySelector('#screen-' + id + ' .crumb');
+    if (!nav) return;
+    const home = `<span class="crumb-link" onclick="show('home')">${t('navHome')}</span>`;
+    const worksLink = `<span class="crumb-link" onclick="show('works')">${t('navWorks')}</span>`;
+    const sep = `<span class="crumb-sep">›</span>`;
+    let parts = [];
+    if (id === 'works') parts = [home, sep, worksLink];
+    else if (id === 'category') parts = [home, sep, worksLink, sep, `<span class="crumb-current">${catName(currentCat)}</span>`];
+    else if (id === 'detail') {
+      const cat = currentCat
+        ? `<span class="crumb-link" onclick="openCat('${currentCat}','${currentCatEn}')">${catName(currentCat)}</span>`
+        : worksLink;
+      parts = [home, sep, worksLink, sep, cat, sep, `<span class="crumb-current">${workTitle(currentTitle)}</span>`];
+    } else if (id === 'about') parts = [home, sep, `<span class="crumb-current">${t('navAbout')}</span>`];
+    nav.innerHTML = parts.join('');
+  }
+  function renderWorksOverview() {
+    const cats = Object.keys(works);
+    const total = cats.reduce((n, c) => n + works[c].length, 0);
+    document.getElementById('works-meta').innerHTML = `<b>${cats.length}</b> ${t('statCats')} · <b>${total}</b> ${t('statWorks')}`;
+  }
+  function backToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+  function cardFlip(el) { el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip'); }
+  function setLang(l) {
+    lang = l;
+    document.querySelectorAll('.lang-switch button').forEach(b =>
+      b.classList.toggle('active', b.dataset.lang === l));
+    const nt = document.getElementById('name-tip');
+    if (nt) nt.classList.remove('show');
+    applyLang();
+  }
+  function applyLang() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const en = el.querySelector('.en');
+      const txt = t(el.getAttribute('data-i18n'));
+      el.innerHTML = en ? `${txt}${en.outerHTML}` : txt;
+    });
+    document.querySelectorAll('[data-i18n-cat]').forEach(el => {
+      const c = el.getAttribute('data-i18n-cat');
+      const en = el.querySelector('.en');
+      el.innerHTML = lang === 'en' ? catName(c) : `${catName(c)}${en ? en.outerHTML : ''}`;
+    });
+    document.querySelectorAll('[data-i18n-misc]').forEach(el => {
+      if (!el.dataset.zh) el.dataset.zh = el.textContent;
+      const k = el.getAttribute('data-i18n-misc');
+      el.textContent = lang === 'zh' ? el.dataset.zh : miscOf(k);
+    });
+    document.querySelectorAll('[data-i18n-about]').forEach(el => {
+      if (!el.dataset.zh) el.dataset.zh = el.innerHTML;
+      const k = el.getAttribute('data-i18n-about');
+      el.innerHTML = lang === 'zh' ? el.dataset.zh : aboutOf(k);
+    });
+    renderWorksOverview();
+    if (currentScreen) renderCrumb(currentScreen);
+    if (currentScreen === 'category' && currentCat) openCat(currentCat, currentCatEn);
+    else if (currentScreen === 'detail' && currentTitle) openDetail(currentTitle, currentIdx);
+  }
+  const works = {
       '文创产品设计': [
         ['原创卡套设计', '24-25 · 卡套设计合计', ['card1.jpg','card2.jpg','card3.jpg','card5.jpg']],
         ['护照夹设计', '2025 · WISH 系列', 'passport1.jpg'],
@@ -807,25 +1081,29 @@
         ['刺绣作品', '26 · 刺绣娃娃', ['emb2c.jpg','emb1c.jpg']],
       ],
     };
+  function openCat(title, en) {
+    currentCat = title; currentCatEn = en || '';
+    const titleShown = catName(title);
+    document.getElementById('cat-title').innerHTML = lang === 'en' ? titleShown : `${titleShown}${en ? `<span class="en">${en}</span>` : ''}`;
     const list = works[title] || [];
     const grid = document.querySelector('#screen-category .grid');
     grid.innerHTML = list.map((w, i) => `
-      <div class="folder-card" onclick="openDetail('${w[0]}')">
-        <div class="fc-img">${
+      <div class="folder-card" onclick="cardFlip(this); openDetail('${w[0]}', ${i})">
+        <div class="fc-img${w[2] ? '' : ' placeholder'}">${
           w[2] ? (Array.isArray(w[2]) ?
             `<div class="carousel" data-idx="0" data-total="${w[2].length}">
-              ${w[2].map((s,idx) => `<img class="c-slide${idx===0?' active':''}" src="${s}" style="object-position:${(w[4]&&w[4][idx])||w[3]||'center 88%'};">`).join('')}
+              ${w[2].map((s,idx) => `<img class="c-slide${idx===0?' active':''}" src="${s}" draggable="false" style="object-position:${(w[4]&&w[4][idx])||w[3]||'center 88%'};">`).join('')}
               <button class="c-arrow c-prev" aria-label="上一张">‹</button>
               <button class="c-arrow c-next" aria-label="下一张">›</button>
               <div class="c-dots">${w[2].map((_,idx) => `<span class="c-dot${idx===0?' active':''}"></span>`).join('')}</div>
             </div>`
-            : `<img src="${w[2]}" style="width:100%;height:100%;object-fit:cover;object-position:${w[3]||'center 35%'};border-radius:14px 14px 0 0;">`)
-          : '作品图占位<small>上传图片后显示在这里</small>'
+            : `<img src="${w[2]}" draggable="false" style="width:100%;height:100%;object-fit:cover;object-position:${w[3]||'center 35%'};border-radius:14px 14px 0 0;">`)
+          : `<span class="badge">${t('preparing')}</span>`
         }</div>
         <div class="fc-info">
           <div class="no">${String(i+1).padStart(2,'0')}</div>
-          <h4>${w[0]}${workEn[w[0]] ? `<span class="en">${workEn[w[0]]}</span>` : ''}</h4>
-          <p>${w[1]}</p>
+          <h4>${workTitle(w[0])}</h4>
+          <p>${subOf(w[0], w[1])}</p>
         </div>
       </div>
     `).join('');
@@ -840,14 +1118,15 @@
         idx = (n + slides.length) % slides.length;
         slides.forEach((s, i) => s.classList.toggle('active', i === idx));
         dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        car._idx = idx; car._show = show;
       };
       const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
       const start = () => { stop(); timer = setInterval(() => show(idx + 1), 3500); };
       prev.addEventListener('click', e => { e.stopPropagation(); show(idx - 1); });
       next.addEventListener('click', e => { e.stopPropagation(); show(idx + 1); });
       dots.forEach((d, i) => d.addEventListener('click', e => { e.stopPropagation(); show(i); }));
-      car.addEventListener('mouseenter', stop);
-      car.addEventListener('mouseleave', start);
+      car.addEventListener('mouseenter', () => { hoverCar = car; stop(); });
+      car.addEventListener('mouseleave', () => { hoverCar = null; start(); });
       start();
     });
     show('category');
@@ -870,6 +1149,56 @@
     '商业标识系统': 'Brand Identity System',
     '贴纸页合集': 'Sticker Sheet Collection',
     '像素创作': 'Pixel Art & Perler Beads',
+  };
+  // 作品名韩语（英语沿用 workEn）
+  const workKo = {
+    '原创卡套设计': '오리지널 카드 홀더',
+    '护照夹设计': '여권 지갑 디자인',
+    '青苹果系列周边': '청사과 시리즈 굿즈',
+    '棉花娃娃设计': '코튼 인형 디자인',
+    '冬之星轨 · 门票设计': '겨울 별자리 · 티켓 디자인',
+    '冬之星轨 · 主视觉海报': '겨울 별자리 · 키 비주얼 포스터',
+    '人生四格宣图 01': '인생 네 컷 홍보 이미지 01',
+    '人生四格宣图 02': '인생 네 컷 홍보 이미지 02',
+    '人生四格宣图 03': '인생 네 컷 홍보 이미지 03',
+    '人生四格宣图 04': '인생 네 컷 홍보 이미지 04',
+    '活动标识设计': '이벤트 로고 디자인',
+    '人物插画': '캐릭터 일러스트',
+    '钩针编织': '코바늘 뜨개질',
+    '刺绣作品': '자수 작품',
+    '商业标识系统': '브랜드 아이덴티티 시스템',
+    '贴纸页合集': '스티커 시트 컬렉션',
+    '像素创作': '픽셀 아트 & 비즈 도안',
+  };
+  // 副标题（按作品名索引，zh 为原文）
+  const subMap = {
+    '原创卡套设计': { en: '24-25 · Card Holder Collection', ko: '24-25 · 카드 홀더 디자인 모음' },
+    '护照夹设计': { en: '2025 · WISH Series', ko: '2025 · WISH 시리즈' },
+    '青苹果系列周边': { en: '2025 · Card Holder / Passport Holder', ko: '2025 · 카드 홀더 / 여권 지갑' },
+    '棉花娃娃设计': { en: '2025 · Doll Design Collection', ko: '2025 · 인형 도안 모음' },
+    '冬之星轨 · 门票设计': { en: '2026 · Shanghai ESONLY', ko: '2026 · 상하이 ESONLY' },
+    '冬之星轨 · 主视觉海报': { en: '2026 · Frost Constellation', ko: '2026 · Frost Constellation' },
+    '人生四格宣图 01': { en: '2025 · JUSTFOTO · Love Story', ko: '2025 · JUSTFOTO · 러브 스토리' },
+    '人生四格宣图 02': { en: '2025 · JUSTFOTO · Eunseok', ko: '2025 · JUSTFOTO · 은석' },
+    '人生四格宣图 03': { en: '2025 · JUSTFOTO', ko: '2025 · JUSTFOTO' },
+    '人生四格宣图 04': { en: '2025 · JUSTFOTO · Non-attribute Event', ko: '2025 · JUSTFOTO · 무속성 이벤트' },
+    '商业标识系统': { en: '2025 · ID Photo / Interview Area Branding', ko: '2025 · 증명사진 / 면접 구역 브랜딩' },
+    '活动标识设计': { en: '2025 · Member Name / Cheer-style Event Logo', ko: '2025 · 멤버 이름 / 응원풍 이벤트 로고' },
+    '贴纸页合集': { en: '25-26 · Character Sticker Sheets', ko: '25-26 · 캐릭터 스티커 시트' },
+    '像素创作': { en: '25-26 · Pixel Art / Perler Bead Patterns', ko: '25-26 · 픽셀 아트 / 비즈 도안' },
+    '人物插画': { en: '25-26 · Portrait Painting / OC Practice', ko: '25-26 · 헤드 드로잉 / OC 연습' },
+    '钩针编织': { en: '25-26 · Doll Hat / Beanie / Pouch', ko: '25-26 · 인형 모자 / 비니 / 파우치' },
+    '刺绣作品': { en: '26 · Embroidered Doll', ko: '26 · 자수 인형' },
+  };
+  // 角色标签（按中文角色索引）
+  const roleMap = {
+    '主视觉设计': { en: 'Key Visual Design', ko: '키 비주얼 디자인' },
+    '视觉设计 / 独立完成': { en: 'Visual Design / Independent', ko: '비주얼 디자인 / 단독 작업' },
+    '插画设计 / 独立完成': { en: 'Illustration / Independent', ko: '일러스트 / 단독 작업' },
+    '周边设计 / 独立完成': { en: 'Merch Design / Independent', ko: '굿즈 디자인 / 단독 작업' },
+    '标识设计 / 独立完成': { en: 'Logo Design / Independent', ko: '로고 디자인 / 단독 작업' },
+    '像素创作 / 独立完成': { en: 'Pixel Art / Independent', ko: '픽셀 아트 / 단독 작업' },
+    '手工制作 / 独立完成': { en: 'Handcraft / Independent', ko: '수공예 / 단독 작업' },
   };
   const workImages = {
     '冬之星轨 · 门票设计': ['eso.jpg'],
@@ -960,22 +1289,214 @@
       desc: '26年初之后刚刚开始尝试自己刺绣做娃娃，上手还挺快的比较满意！真的很喜欢做手工，在学习了不同东西之后更加坚定自己对手工还算比较有天赋。'
     },
   };
-  function openDetail(title) {
-    document.getElementById('detail-title').innerHTML = `${title}${workEn[title] ? `<span class="en">${workEn[title]}</span>` : ''}`;
-    const imgs = workImages[title] || [];
+  // 作品介绍（按作品名索引）
+  const descMap = {
+    '冬之星轨 · 门票设计': {
+      en: "It was an honor to design the key visual for the Winter Star Rail ESONLY. My design skills were still developing at the time, and I'm grateful to the organizers for the invitation — a truly enjoyable collaboration.",
+      ko: '겨울 별자리 ESONLY의 키 비주얼을 디자인하게 되어 영광이었습니다. 당시 디자인 실력은 다듬어지는 단계였고, 주최 측의 초청에 감사하며 즐겁게 협업했습니다.'
+    },
+    '冬之星轨 · 主视觉海报': {
+      en: 'Key visual for the Frost Constellation event, including the event reveal and venue information long graphic.',
+      ko: 'Frost Constellation 이벤트 키 비주얼. 이벤트 공개 및 장소 정보를 담은 롱 그래픽을 포함합니다.'
+    },
+    '人生四格宣图 01': {
+      en: "A very special design experience. I drew inspiration from a word game and created this piece; I'm glad it was well received.",
+      ko: '특별한 디자인 경험이었습니다. 단어 게임에서 영감을 받아 작업했고, 좋은 평가를 받아 기뻤습니다.'
+    },
+    '人生四格宣图 02': {
+      en: 'Inspired by the aesthetics of bag-haul content, reimagined as everyday items scattered on a desk.',
+      ko: '가방 속 공개 콘텐츠의 감각에서 영감을 받아 책상에 흩어진 일상 물건으로 재해석했습니다.'
+    },
+    '人生四格宣图 03': {
+      en: 'Inspired by the aesthetics of bag-haul content, reimagined as everyday items scattered on a desk.',
+      ko: '가방 속 공개 콘텐츠의 감각에서 영감을 받아 책상에 흩어진 일상 물건으로 재해석했습니다.'
+    },
+    '人生四格宣图 04': {
+      en: "My first non-attribute photo strip. Though reach was modest, the process applied much of what I'd learned — a valuable experience.",
+      ko: '무속성 인생 네 컷을 처음 작업했습니다. 조회 수는 아쉬웠지만 배운 지식을 많이 활용한 좋은 경험이었습니다.'
+    },
+    '棉花娃娃设计': {
+      en: 'Includes hand-drawn and Illustrator vector work; some designs have been produced as physical products.',
+      ko: '손그림과 Illustrator 벡터 작업을 포함하며, 일부는 실제 제품으로 제작되었습니다.'
+    },
+    '青苹果系列周边': {
+      en: 'Green Apple themed merch, including clear card holders (front/back) and a passport holder, printed with clover, star and apple motifs.',
+      ko: '청사과 테마 굿즈. 투명 카드 홀더(앞/뒤)와 여권 지갑에 클로버, 별, 사과 무늬 프린트를 적용했습니다.'
+    },
+    '护照夹设计': {
+      en: 'WISH series blue-star themed passport holder, showing the card holder, charm and finished passport holder.',
+      ko: 'WISH 시리즈 파란 별 테마 여권 지갑. 카드 홀더, 키링, 완성된 여권 지갑을 보여줍니다.'
+    },
+    '原创卡套设计': {
+      en: 'A range of card holder designs, including RIIZE cartoon and pixel themes, with multiple front/back print options.',
+      ko: '다양한 카드 홀더 디자인. RIIZE 카툰, 픽셀 테마와 여러 앞뒤 프린트 안을 포함합니다.'
+    },
+    '贴纸页合集': {
+      en: "I started my first sticker sheet in mid-2025. The response was decent and it felt rewarding to draw; though fiddly, it was a great experience.",
+      ko: '2025년 중반 첫 스티커 시트를 시도했습니다. 반응이 괜찮았고 그리는 성취감도 컸습니다. 번거롭지만 좋은 경험이었습니다.'
+    },
+    '像素创作': {
+      en: 'I started pixel art in 2024; perler beads have come back into fashion lately, so I also made some bead patterns.',
+      ko: '2024년부터 픽셀 아트를 시작했습니다. 최근 비즈가 다시 인기를 끌어 비즈 도안도 몇 점 만들었습니다.'
+    },
+    '商业标识系统': {
+      en: 'Wayfinding logos for club events, made into KT boards; covering ID photo, resume polish, and civil-service, English and corporate interview areas.',
+      ko: '동아리 행사용 사인 표지판으로 KT 보드 제작에 사용되었습니다. 증명사진, 이력서 보정 및 공무원·영어·기업 면접 구역 로고를 포함합니다.'
+    },
+    '活动标识设计': {
+      en: 'Practice-oriented member-name and cheer-style event lettering, with multiple colorways and star, bear and other decorations.',
+      ko: '연습 위주의 멤버 이름과 응원풍 이벤트 레터링. 여러 배색과 별, 곰돌이 등 장식 요소를 담았습니다.'
+    },
+    '人物插画': {
+      en: "I started digital drawing in middle school. I draw less often now, but seeing my work still feels rewarding, and I keep trying new styles. That early passion is what led me to become an art student and study art seriously. Though my tablet, with me for nearly eight years, has finally broken — I wonder when I'll get a new one...",
+      ko: '중학교 때부터 디지털 드로잉을 시작했습니다. 요즘 그릴 기회는 줄었지만 작품을 볼 때마다 여전히 성취감이 들고 새 스타일을 시도하고 있습니다. 이 초심이 저를 미술 길로 이끌어 정식으로 미술을 공부하게 했는지도 모릅니다. 거의 8년 함께한 타블렛이 완전히 고장 났는데, 언제 새로 살 수 있을까요......'
+    },
+    '钩针编织': {
+      en: 'The first handcraft I learned after starting university. It took surprisingly little time to go from knowing nothing to teaching friends, though I mostly pick it up on cold days.',
+      ko: '대학에 와서 처음 배운 수공예입니다. 아무것도 모르던 상태에서 친구에게 가르치기까지 비교적 빨랐지만, 주로 날씨가 추워질 때 덤벙하게 꺼냅니다.'
+    },
+    '刺绣作品': {
+      en: "I only started embroidering dolls in early 2026. I picked it up quickly and am fairly happy with the results! I truly love handcrafts; after learning different skills, I'm more confident I have a natural feel for them.",
+      ko: '2026년 초에 직접 자수 인형 만들기를 시작했습니다. 적응이 빨라 비교적 만족합니다! 수공예를 정말 좋아하고, 여러 것을 배우며 손재주가 있다는 확신이 더 들었습니다.'
+    },
+  };
+  // 关于我正文（含 <br>，以 innerHTML 渲染）
+  const aboutMap = {
+    name: {
+      en: "Hello, I'm 李思睿",
+      ko: '안녕하세요, 李思睿'
+    },
+    intro: {
+      en: "Undergraduate in Visual Communication Design at Zhejiang Sci-Tech University. I love design, fashion and creative work. Hands-on and self-driven, I taught myself Illustrator and other tools; I enjoy crochet, embroidery and other crafts, and pick up new skills quickly. Looking forward to learning more beautiful and interesting things!",
+      ko: '절강이공대학교 시각디자인과 재학 중입니다. 디자인, 패션, 창의적인 것을 좋아합니다. 손재주가 좋고 Illustrator 등 소프트웨어를 자습으로 익혔으며, 코바늘, 자수 등 공예를 즐기고 습득력이 빠릅니다. 앞으로 더 아름답고 재미있는 것을 배우고 싶어요!'
+    },
+    edu: {
+      en: '2024 — 2028 · Zhejiang Sci-Tech University<br>Visual Communication Design · Undergraduate · GPA 3.33/4.0<br>Major: Branding / Packaging / Illustration / Layout / UI / Digital Media',
+      ko: '2024 — 2028 · 절강이공대학교<br>시각디자인 · 학사 재학 · GPA 3.33/4.0<br>전공: 브랜딩 / 패키지 / 일러스트 / 편집 / UI / 디지털 미디어'
+    },
+    skill: {
+      en: 'Illustrator · Photoshop · Blender · Medibang<br>Hands-on; able to deliver independently from illustration to physical product.',
+      ko: 'Illustrator · Photoshop · Blender · Medibang<br>손재주가 좋아 일러스트부터 실물 구현까지 단독으로 완성할 수 있습니다.'
+    },
+    direction: {
+      en: 'Target: Merchandise Design / UI Design<br>Strengths: Merch production, event visuals, illustration and cheer logos<br>Experienced in end-to-end merch sales projects (custom orders from 200 to 1200+ people)',
+      ko: '희망 직무: 굿즈 디자인 / UI 디자인<br>강점: 굿즈 실물 구현, 이벤트 비주얼, 일러스트, 응원 로고<br>굿즈 판매 프로젝트 전 과정 경험 다수 (200~1200+인 맞제작)'
+    }
+  };
+  // 首页卡片与分类大卡片副标题
+  const miscMap = {
+    home01: { en: 'Branding / Illustration / Operations / Type & More', ko: '브랜딩 / 일러스트 / 운영 디자인 / 타이포 등' },
+    home02: { en: 'Experience / Skills / Contact', ko: '경력 / 스킬 / 연락처' },
+    home03: { en: 'Design diary & work updates', ko: '디자인 일상과 작품 업데이트' },
+    catWenchuang: { en: 'Card holders / Passport holders / Merch', ko: '카드 홀더 / 여권 지갑 / 굿즈' },
+    catMeigong: { en: 'Event visuals / Photo strips', ko: '이벤트 비주얼 / 인생 네 컷' },
+    catLogo: { en: 'Brand logos / Event logos', ko: '브랜드 로고 / 이벤트 로고' },
+    catHuihua: { en: 'Stickers / Pixel art', ko: '스티커 / 픽셀 아트' },
+    catShougong: { en: 'Crochet, embroidery & crafts', ko: '코바늘 / 자수 등 공예' },
+    noImg: { en: 'Work images to be uploaded', ko: '작품 이미지 업로드 예정' },
+    nameTip: { zh: 'hi，你竟然能发现这里哈哈哈。恭喜发现彩蛋！看到这里还不来加我！', en: "Hi, you actually found this! Congrats on unlocking the easter egg — why not add me?", ko: 'hi, 여기를 발견하다니! 해피 이스터에그! 그럼 이제 저를 추가해 주세요!' }
+  };
+  // 取值辅助：zh 用原文，其它语言走字典并兜底原文
+  const workTitle = n => lang === 'en' ? (workEn[n] || n) : lang === 'ko' ? (workKo[n] || n) : n;
+  const subOf = (n, zh) => lang === 'zh' ? zh : (subMap[n] && subMap[n][lang]) || zh;
+  const roleOf = r => lang === 'zh' ? r : (roleMap[r] && roleMap[r][lang]) || r;
+  const descOf = (n, zh) => lang === 'zh' ? zh : (descMap[n] && descMap[n][lang]) || zh;
+  const miscOf = k => { const m = miscMap[k]; return m ? (m[lang] || m.zh || '') : ''; };
+  const aboutOf = k => (aboutMap[k] && aboutMap[k][lang]) || '';
+  function openDetail(title, idx) {
+    currentTitle = title;
+    const list = works[currentCat] || [];
+    currentIdx = (idx != null) ? idx : Math.max(0, list.findIndex(w => w[0] === title));
+    document.getElementById('detail-title').innerHTML = workTitle(title);
+    detailImgs = workImages[title] || [];
     const box = document.getElementById('detail-box');
-    if (imgs.length) {
-      box.innerHTML = imgs.map(src => `<img src="${src}">`).join('');
+    if (detailImgs.length) {
+      box.innerHTML = detailImgs.map((src, i) => `<img src="${src}" draggable="false" onclick="openLightbox(${i})">`).join('');
     } else {
-      box.innerHTML = '<p style="color:#8f9295;line-height:2">作品图片待上传～</p>';
+      box.innerHTML = `<p style="color:#8f9295;line-height:2">${lang === 'zh' ? '作品图片待上传～' : miscOf('noImg')}</p>`;
     }
     const meta = workMeta[title] || {time:'', role:'', tools:'', desc:''};
     document.getElementById('detail-time').textContent = meta.time;
-    document.getElementById('detail-role').textContent = meta.role;
+    document.getElementById('detail-role').textContent = roleOf(meta.role);
     document.getElementById('detail-tools').textContent = meta.tools;
-    document.getElementById('detail-desc').textContent = meta.desc;
+    document.getElementById('detail-desc').textContent = descOf(title, meta.desc);
+    const multi = list.length > 1;
+    document.getElementById('detail-prev').disabled = !multi;
+    document.getElementById('detail-next').disabled = !multi;
     show('detail');
   }
+  function navigateDetail(step) {
+    const list = works[currentCat] || [];
+    if (list.length < 2) return;
+    currentIdx = (currentIdx + step + list.length) % list.length;
+    openDetail(list[currentIdx][0], currentIdx);
+  }
+  function openLightbox(i) {
+    if (!detailImgs.length) return;
+    lbIdx = i;
+    document.getElementById('lightbox-img').src = detailImgs[lbIdx];
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function lbNav(step) {
+    if (!detailImgs.length) return;
+    lbIdx = (lbIdx + step + detailImgs.length) % detailImgs.length;
+    document.getElementById('lightbox-img').src = detailImgs[lbIdx];
+  }
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (lb.classList.contains('open')) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lbNav(-1);
+      if (e.key === 'ArrowRight') lbNav(1);
+      return;
+    }
+    if (hoverCar && hoverCar._show) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); hoverCar._show(hoverCar._idx - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); hoverCar._show(hoverCar._idx + 1); }
+    }
+  });
+  // 回到顶部：滚动超过阈值显示
+  const toTop = document.getElementById('to-top');
+  const getScrollY = () => window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  window.addEventListener('scroll', () => toTop.classList.toggle('show', getScrollY() > 300));
+  window.addEventListener('resize', () => toTop.classList.toggle('show', getScrollY() > 300));
+  // 防下载：图片禁用右键菜单与拖拽
+  document.addEventListener('contextmenu', e => { if (e.target.closest('img')) e.preventDefault(); });
+  document.addEventListener('dragstart', e => { if (e.target.closest('img')) e.preventDefault(); });
+  // 名字彩蛋：单击翻面闪粉，长按弹出自我介绍短句
+  const nameBox = document.getElementById('name-box');
+  const nameTip = document.getElementById('name-tip');
+  let pressTimer = null, tipTimer = null, longPressed = false;
+  function flashName() {
+    nameBox.classList.remove('flash');
+    void nameBox.offsetWidth;
+    nameBox.classList.add('flash');
+  }
+  function showNameTip() {
+    nameTip.textContent = miscOf('nameTip');
+    nameTip.classList.add('show');
+    clearTimeout(tipTimer);
+    tipTimer = setTimeout(() => nameTip.classList.remove('show'), 2600);
+  }
+  if (nameBox) {
+    nameBox.addEventListener('pointerdown', () => {
+      longPressed = false;
+      pressTimer = setTimeout(() => { longPressed = true; showNameTip(); }, 600);
+    });
+    const cancelPress = () => { if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; } };
+    nameBox.addEventListener('pointerup', cancelPress);
+    nameBox.addEventListener('pointerleave', cancelPress);
+    nameBox.addEventListener('click', () => {
+      if (longPressed) { longPressed = false; return; }
+      flashName();
+    });
+  }
+  renderWorksOverview();
   function toggleFolder(el) {
     el.parentElement.classList.toggle('open');
   }
