@@ -590,6 +590,11 @@
         <h3>绘画作品<span class="en">ILLUSTRATION</span></h3>
         <p>贴纸 / 像素创作</p>
       </div>
+      <div class="neu nav-card" onclick="openCat('手工作品','HANDICRAFT')">
+        <div class="num">E</div>
+        <h3>手工作品<span class="en">HANDICRAFT</span></h3>
+        <p>钩针 / 刺绣等手工</p>
+      </div>
     </div>
   </div>
 </div>
@@ -685,9 +690,9 @@
         <div style="color: var(--accent); letter-spacing: 4px; font-size: .85rem; margin-bottom: 12px;">HELLO</div>
         <h3 style="font-family: 'ZCOOL QingKe HuangYou', sans-serif; font-size: 1.9rem; letter-spacing: 3px; margin-bottom: 14px;">你好，我是李思睿</h3>
         <p style="color: #8f9295; line-height: 2.1; font-size: .98rem;">
-          浙江理工大学视觉传达设计本科在读，求职方向文创产品 / UI 设计。<br>
-          有多次文创销售项目全流程经验，从插画到实物落地都能独立完成。<br>
-          欢迎交流与合作。
+          浙江理工大学视觉传达设计本科在读，喜欢设计、时尚与发挥创意的事物。<br>
+          动手能力强，自学掌握 Illustrator 等软件；爱好钩针、刺绣等手工，学习能力强。<br>
+          希望可以学习更多美好有趣的事情！
         </p>
       </div>
     </div>
@@ -795,7 +800,11 @@
       '绘画作品': [
         ['贴纸页合集', '25-26 · 各类角色贴纸 sheet', ['sticker1.jpg','sticker2.jpg','sticker3.jpg','sticker4.jpg','sticker5.jpg']],
         ['像素创作', '25-26 · 像素画 / 拼豆图纸', ['px_scene1.jpg','px_scene2.jpg','px_sprites.jpg','px_group1.jpg','px_group2.jpg'], '', ['center 50%','center 50%','center 50%','center 50%','center 65%']],
-        ['人物插画', '25-26 · 头像厚涂 / OC 角色练习', ['draw1c.jpg','draw2c.jpg','draw3c.jpg','draw4c.jpg','draw5c.jpg','px_solo.jpg'], '', ['center 50%','center 50%','center 50%','center 50%','center 50%','center 50%']],
+        ['人物插画', '25-26 · 头像厚涂 / OC 角色练习', ['draw1c.jpg','draw6c.jpg','draw2c.jpg','draw3c.jpg','draw4c.jpg','draw5c.jpg','px_solo.jpg','draw7c.jpg','draw8c.jpg'], '', ['center 50%','center 50%','center 50%','center 50%','center 50%','center 50%','center 50%','center 50%','center 50%']],
+      ],
+      '手工作品': [
+        ['钩针编织', '25-26 · 娃娃帽 / 毛线帽 / 小包', ['cro1c.jpg','cro2c.jpg','cro3c.jpg','cro4c.jpg','cro5c.jpg','cro6c.jpg','cro7c.jpg','cro8c.jpg']],
+        ['刺绣作品', '26 · 刺绣娃娃', ['emb2c.jpg','emb1c.jpg']],
       ],
     };
     const list = works[title] || [];
@@ -856,6 +865,8 @@
     '人生四格宣图 04': 'Photo Strip 04',
     '活动标识设计': 'Event Logo Design',
     '人物插画': 'Character Illustration',
+    '钩针编织': 'Crochet',
+    '刺绣作品': 'Embroidery',
     '商业标识系统': 'Brand Identity System',
     '贴纸页合集': 'Sticker Sheet Collection',
     '像素创作': 'Pixel Art & Perler Beads',
@@ -875,7 +886,9 @@
     '像素创作': ['px_scene1_full.jpg','px_scene2_full.jpg','px_sprites.jpg','px_group1.jpg','px_group2.jpg'],
     '商业标识系统': ['logo2.jpg'],
     '活动标识设计': ['logo1.jpg'],
-    '人物插画': ['draw1.jpg','draw2.jpg','draw3.jpg','draw4.jpg','draw5.jpg','px_solo.jpg'],
+    '人物插画': ['draw1.jpg','draw6.jpg','draw2.jpg','draw3.jpg','draw4.jpg','draw5.jpg','px_solo.jpg','draw7.jpg','draw8.jpg'],
+    '钩针编织': ['cro1.jpg','cro2.jpg','cro3.jpg','cro4.jpg','cro5.jpg','cro6.jpg','cro7.jpg','cro8.jpg'],
+    '刺绣作品': ['emb2.jpg','emb1.jpg'],
   };
   const workMeta = {
     '冬之星轨 · 门票设计': {
@@ -920,7 +933,7 @@
     },
     '贴纸页合集': {
       time: '25-26', role: '插画设计 / 独立完成', tools: 'Illustrator',
-      desc: 'RIIZE 角色同人贴纸 sheet 设计合集，含三周年、成员个人主题等共 5 款配色与造型。'
+      desc: '从25年中开始了第一张贴纸页的尝试，反响还不错，画起来也比较有成就感，虽然比较麻烦但是还是很棒的体验。'
     },
     '像素创作': {
       time: '25-26', role: '像素创作 / 独立完成', tools: 'Medibang',
@@ -936,7 +949,15 @@
     },
     '人物插画': {
       time: '25-26', role: '插画设计 / 独立完成', tools: 'Medibang',
-      desc: '人物头像厚涂与 OC 角色练习，含真人参考头像、角色立绘与头像、Q 版造型等多幅作品。'
+      desc: '从初中开始就开始了板绘生涯，现在画的机会越来越少了，但是每次看到自己的作品还是感觉很有成就感，也一直在尝试新的风格。可能也是这个初心让我走上了美术生的道路，正式学起了美术。不过陪了我快八年的数位板彻底坏掉了，什么时候可以换新的呢......'
+    },
+    '钩针编织': {
+      time: '25-26', role: '手工制作 / 独立完成', tools: '钩针 / 毛线',
+      desc: '这是我大学之后第一个学习的手工，从完全不懂到教朋友跨越的时间还算短，不过基本上只有天冷的时候会心血来潮。'
+    },
+    '刺绣作品': {
+      time: '26', role: '手工制作 / 独立完成', tools: '刺绣 / 布料',
+      desc: '26年初之后刚刚开始尝试自己刺绣做娃娃，上手还挺快的比较满意！真的很喜欢做手工，在学习了不同东西之后更加坚定自己对手工还算比较有天赋。'
     },
   };
   function openDetail(title) {
