@@ -107,6 +107,11 @@
     letter-spacing: 2px;
     margin-bottom: 6px;
   }
+  .nav-card h3 .en, .page-head h2 .en, #detail-title .en {
+    font-family: "Space Grotesk", sans-serif; font-style: italic;
+    font-size: .58em; font-weight: 400; color: #5c6263; letter-spacing: 1px;
+    margin-left: 8px;
+  }
   .nav-card p { color: var(--text-dim); font-size: .78rem; line-height: 1.7; }
   .nav-card .dot {
     position: absolute; right: 26px; top: 26px;
@@ -216,6 +221,29 @@
     color: #5c6263; letter-spacing: 2px; font-size: .8rem;
   }
   .fc-img small { font-size: .7rem; color: #5c6263; letter-spacing: 1px; }
+  .carousel { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 14px 14px 0 0; }
+  .c-slide {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    object-position: center 88%; opacity: 0; transition: opacity .4s ease;
+  }
+  .c-slide.active { opacity: 1; }
+  .c-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+    width: 30px; height: 30px; border: none; border-radius: 50%;
+    background: rgba(20,20,20,.55); color: #bec0c2; font-size: 1.2rem;
+    line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .c-prev { left: 10px; }
+  .c-next { right: 10px; }
+  .c-arrow:hover { background: rgba(20,20,20,.8); color: #fff; }
+  .c-dots {
+    position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); z-index: 3;
+    display: flex; gap: 6px;
+  }
+  .c-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.4); cursor: pointer;
+  }
+  .c-dot.active { background: var(--accent); }
   .fc-info { padding: 18px 22px 22px; }
   .folder-card .no {
     font-family: "Space Grotesk", sans-serif;
@@ -229,6 +257,11 @@
   .folder-card h4 {
     font-family: "ZCOOL QingKe HuangYou", sans-serif;
     font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 6px;
+  }
+  .folder-card h4 .en {
+    font-family: "Space Grotesk", sans-serif; font-style: italic;
+    font-size: .62em; font-weight: 400; color: #5c6263; letter-spacing: .5px;
+    margin-left: 8px;
   }
   .folder-card p { color: var(--text-dim); font-size: .8rem; }
 
@@ -249,11 +282,18 @@
   @media (max-width: 720px) { .detail-layout { grid-template-columns: 1fr; } }
   .detail-img {
     border-radius: 20px;
-    aspect-ratio: 4/3;
     display: flex; flex-direction: column; gap: 8px;
     align-items: center; justify-content: center;
     color: var(--text-dim); letter-spacing: 2px;
     font-size: .9rem;
+    padding: 20px;
+  }
+  .detail-img img {
+    max-width: 520px;
+    width: 100%;
+    border-radius: 16px;
+    margin-bottom: 16px;
+    box-shadow: 6px 6px 14px #101111, -4px -4px 10px #323536;
   }
   .detail-info { padding: 30px; border-radius: 20px; background: var(--panel);
     box-shadow: 10px 10px 20px #101010, -10px -10px 20px #414445; }
@@ -487,26 +527,26 @@
           <div class="neu nav-card" onclick="show('works')">
             <div class="dot"></div>
             <div class="num">01</div>
-            <h3>作品集</h3>
+            <h3>作品集<span class="en">PORTFOLIO</span></h3>
             <p>品牌设计 / 品牌插画 / 运营设计 / 字体与其它</p>
           </div>
           <div class="neu nav-card" onclick="show('about')">
             <div class="dot"></div>
             <div class="num">02</div>
-            <h3>关于我</h3>
+            <h3>关于我<span class="en">ABOUT</span></h3>
             <p>设计经历 / 技能 / 联系方式</p>
           </div>
           <div class="neu nav-card" onclick="window.open('https://xhslink.cn/o/7FuXu7sZ0Je','_blank')">
             <div class="dot"></div>
             <div class="num">03</div>
-            <h3>小红书</h3>
-            <p>4.6w+ 赞与收藏 / 设计日常与作品更新</p>
+            <h3>小红书<span class="en">XIAOHONGSHU</span></h3>
+            <p>设计日常与作品更新（点击跳转）</p>
           </div>
           <div class="neu nav-card" onclick="window.location.href='mailto:2298374046@qq.com'">
             <div class="dot"></div>
             <div class="num">04</div>
-            <h3>联系我</h3>
-            <p>2298374046@qq.com</p>
+            <h3>联系我<span class="en">CONTACT</span></h3>
+            <p>2298374046@qq.com（点击跳转）</p>
           </div>
         </div>
       </div>
@@ -532,23 +572,23 @@
     <div class="grid">
       <div class="neu nav-card" onclick="openCat('文创产品设计','MERCHANDISE')">
         <div class="num">A</div>
-        <h3>文创产品设计</h3>
+        <h3>文创产品设计<span class="en">MERCHANDISE</span></h3>
         <p>卡套 / 护照夹 / 周边实物</p>
       </div>
       <div class="neu nav-card" onclick="openCat('美工设计','POSTER')">
         <div class="num">B</div>
-        <h3>美工设计</h3>
+        <h3>美工设计<span class="en">POSTER</span></h3>
         <p>活动视觉 / 人生四格宣图</p>
       </div>
       <div class="neu nav-card" onclick="openCat('标志设计','LOGO')">
         <div class="num">C</div>
-        <h3>标志设计</h3>
-        <p>应援LOGO / 商业标识</p>
+        <h3>标志设计<span class="en">LOGO</span></h3>
+        <p>商业标识 / 活动标识</p>
       </div>
       <div class="neu nav-card" onclick="openCat('绘画作品','ILLUSTRATION')">
         <div class="num">D</div>
-        <h3>绘画作品</h3>
-        <p>贴纸 / 棉花娃娃 / 像素艺术</p>
+        <h3>绘画作品<span class="en">ILLUSTRATION</span></h3>
+        <p>贴纸 / 像素创作</p>
       </div>
     </div>
   </div>
@@ -612,19 +652,19 @@
       <div class="detail-info">
         <div class="info-row">
           <span>时间 TIME</span>
-          <b>2025</b>
+          <b id="detail-time">2025</b>
         </div>
         <div class="info-row">
           <span>角色 ROLE</span>
-          <b>视觉设计 / 独立完成</b>
+          <b id="detail-role">视觉设计 / 独立完成</b>
         </div>
         <div class="info-row">
           <span>工具 TOOLS</span>
-          <b>Photoshop · Illustrator</b>
+          <b id="detail-tools">Photoshop · Illustrator</b>
         </div>
         <div class="info-row">
           <span>说明 DESCRIPTION</span>
-          <b style="display:block; color:#8f9295; font-weight:400;">项目介绍文字待补充……这里写项目背景、设计思路、你负责的部分。</b>
+          <b id="detail-desc" style="display:block; color:#8f9295; font-weight:400;">项目介绍文字待补充……</b>
         </div>
       </div>
     </div>
@@ -731,61 +771,188 @@
     document.getElementById('screen-' + id).classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-  function openCat(title) {
-    document.getElementById('cat-title').textContent = title;
+  function openCat(title, en) {
+    document.getElementById('cat-title').innerHTML = `${title}${en ? `<span class="en">${en}</span>` : ''}`;
     const works = {
       '文创产品设计': [
-        ['原创卡套设计', '2025 · RIIZE 成员主题'],
-        ['护照夹设计', '2025 · WISH 系列'],
-        ['青苹果系列周边', '2025 · 卡套 / 护照夹'],
+        ['原创卡套设计', '24-25 · 卡套设计合计', ['card1.jpg','card2.jpg','card3.jpg','card5.jpg']],
+        ['护照夹设计', '2025 · WISH 系列', 'passport1.jpg'],
+        ['青苹果系列周边', '2025 · 卡套 / 护照夹', ['apple1.jpg','apple2.jpg','apple3.jpg'], '', ['center 50%','center 50%','center 100%']],
+        ['棉花娃娃设计', '2025 · 娃稿设计稿合集', ['doll3.jpg','doll1.jpg','doll2.jpg','doll4.jpg','doll5.jpg','doll6.jpg','doll7.jpg','doll8.jpg','doll9.jpg']],
       ],
       '美工设计': [
         ['冬之星轨 · 门票设计', '2026 · 上海ESONLY', 'eso.jpg'],
         ['冬之星轨 · 主视觉海报', '2026 · Frost Constellation', 'eso_poster.jpg'],
         ['人生四格宣图 01', '2025 · JUSTFOTO · 恋爱物语', 'jft1.jpg'],
-        ['人生四格宣图 02', '2025 · JUSTFOTO · Eunseok属性', 'jft2.jpg'],
-        ['人生四格宣图 03', '2025 · JUSTFOTO', 'jft3.jpg'],
+        ['人生四格宣图 02', '2025 · JUSTFOTO · Eunseok属性', 'jft2.jpg', 'center 55%'],
+        ['人生四格宣图 03', '2025 · JUSTFOTO', 'jft3.jpg', 'center 35%'],
+        ['人生四格宣图 04', '2025 · JUSTFOTO · 无属性活动', 'jft4.jpg', 'center 40%'],
       ],
       '标志设计': [
-        ['粉丝应援 LOGO', '2025 · NCT WISH / RIIZE'],
-        ['商业标识系统', '2025 · 证件照 / 面试区品牌'],
+        ['商业标识系统', '2025 · 证件照 / 面试区品牌', 'logo2.jpg'],
+        ['活动标识设计', '2025 · 成员名 / 应援风活动标识', 'logo1.jpg'],
       ],
       '绘画作品': [
-        ['同人贴纸页', '2025 · RIIZE 角色贴纸 sheet'],
-        ['棉花娃娃人设', '2025 · Q版形象 / 实体娃娃'],
-        ['像素艺术场景', '2025 · 等距视角寿司店 / 饮品店'],
+        ['贴纸页合集', '25-26 · 各类角色贴纸 sheet', ['sticker1.jpg','sticker2.jpg','sticker3.jpg','sticker4.jpg','sticker5.jpg']],
+        ['像素创作', '25-26 · 像素画 / 拼豆图纸', ['px_scene1.jpg','px_scene2.jpg','px_sprites.jpg','px_group1.jpg','px_group2.jpg'], '', ['center 50%','center 50%','center 50%','center 50%','center 65%']],
+        ['人物插画', '25-26 · 头像厚涂 / OC 角色练习', ['draw1c.jpg','draw2c.jpg','draw3c.jpg','draw4c.jpg','draw5c.jpg','px_solo.jpg'], '', ['center 50%','center 50%','center 50%','center 50%','center 50%','center 50%']],
       ],
     };
     const list = works[title] || [];
     const grid = document.querySelector('#screen-category .grid');
     grid.innerHTML = list.map((w, i) => `
       <div class="folder-card" onclick="openDetail('${w[0]}')">
-        <div class="fc-img">${w[2] ? `<img src="${w[2]}" style="width:100%;height:100%;object-fit:cover;object-position:center 35%;border-radius:14px 14px 0 0;">` : '作品图占位<small>上传图片后显示在这里</small>'}</div>
+        <div class="fc-img">${
+          w[2] ? (Array.isArray(w[2]) ?
+            `<div class="carousel" data-idx="0" data-total="${w[2].length}">
+              ${w[2].map((s,idx) => `<img class="c-slide${idx===0?' active':''}" src="${s}" style="object-position:${(w[4]&&w[4][idx])||w[3]||'center 88%'};">`).join('')}
+              <button class="c-arrow c-prev" aria-label="上一张">‹</button>
+              <button class="c-arrow c-next" aria-label="下一张">›</button>
+              <div class="c-dots">${w[2].map((_,idx) => `<span class="c-dot${idx===0?' active':''}"></span>`).join('')}</div>
+            </div>`
+            : `<img src="${w[2]}" style="width:100%;height:100%;object-fit:cover;object-position:${w[3]||'center 35%'};border-radius:14px 14px 0 0;">`)
+          : '作品图占位<small>上传图片后显示在这里</small>'
+        }</div>
         <div class="fc-info">
           <div class="no">${String(i+1).padStart(2,'0')}</div>
-          <h4>${w[0]}</h4>
+          <h4>${w[0]}${workEn[w[0]] ? `<span class="en">${workEn[w[0]]}</span>` : ''}</h4>
           <p>${w[1]}</p>
         </div>
       </div>
     `).join('');
+    // 封面轮播：自动播放 + 箭头 + 圆点，悬停暂停
+    grid.querySelectorAll('.carousel').forEach(car => {
+      const slides = car.querySelectorAll('.c-slide');
+      const dots = car.querySelectorAll('.c-dot');
+      const prev = car.querySelector('.c-prev');
+      const next = car.querySelector('.c-next');
+      let idx = 0, timer = null;
+      const show = n => {
+        idx = (n + slides.length) % slides.length;
+        slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      };
+      const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+      const start = () => { stop(); timer = setInterval(() => show(idx + 1), 3500); };
+      prev.addEventListener('click', e => { e.stopPropagation(); show(idx - 1); });
+      next.addEventListener('click', e => { e.stopPropagation(); show(idx + 1); });
+      dots.forEach((d, i) => d.addEventListener('click', e => { e.stopPropagation(); show(i); }));
+      car.addEventListener('mouseenter', stop);
+      car.addEventListener('mouseleave', start);
+      start();
+    });
     show('category');
   }
+  const workEn = {
+    '原创卡套设计': 'Original Card Holder',
+    '护照夹设计': 'Passport Holder',
+    '青苹果系列周边': 'Green Apple Series',
+    '棉花娃娃设计': 'Cotton Doll Design',
+    '冬之星轨 · 门票设计': 'Winter Star Rail · Ticket',
+    '冬之星轨 · 主视觉海报': 'Winter Star Rail · Key Visual',
+    '人生四格宣图 01': 'Photo Strip 01',
+    '人生四格宣图 02': 'Photo Strip 02',
+    '人生四格宣图 03': 'Photo Strip 03',
+    '人生四格宣图 04': 'Photo Strip 04',
+    '活动标识设计': 'Event Logo Design',
+    '人物插画': 'Character Illustration',
+    '商业标识系统': 'Brand Identity System',
+    '贴纸页合集': 'Sticker Sheet Collection',
+    '像素创作': 'Pixel Art & Perler Beads',
+  };
   const workImages = {
     '冬之星轨 · 门票设计': ['eso.jpg'],
     '冬之星轨 · 主视觉海报': ['eso_poster.jpg', 'eso_info1.jpg', 'eso_info2.jpg'],
     '人生四格宣图 01': ['jft1.jpg'],
     '人生四格宣图 02': ['jft2.jpg'],
     '人生四格宣图 03': ['jft3.jpg'],
+    '人生四格宣图 04': ['jft4.jpg'],
+    '棉花娃娃设计': ['doll3.jpg','doll1.jpg','doll2.jpg','doll4.jpg','doll5.jpg','doll6.jpg','doll7.jpg','doll8.jpg','doll9.jpg'],
+    '青苹果系列周边': ['apple1.jpg','apple2.jpg','apple3.jpg'],
+    '护照夹设计': ['passport2.jpg'],
+    '原创卡套设计': ['card1.jpg','card2.jpg','card3.jpg','card5.jpg'],
+    '贴纸页合集': ['sticker1.jpg','sticker2.jpg','sticker3.jpg','sticker4.jpg','sticker5.jpg'],
+    '像素创作': ['px_scene1_full.jpg','px_scene2_full.jpg','px_sprites.jpg','px_group1.jpg','px_group2.jpg'],
+    '商业标识系统': ['logo2.jpg'],
+    '活动标识设计': ['logo1.jpg'],
+    '人物插画': ['draw1.jpg','draw2.jpg','draw3.jpg','draw4.jpg','draw5.jpg','px_solo.jpg'],
+  };
+  const workMeta = {
+    '冬之星轨 · 门票设计': {
+      time: '2026', role: '主视觉设计', tools: 'Illustrator · Photoshop',
+      desc: '很荣幸成为这次冬之星轨 ESONLY 的主视觉设计，这时候我的设计能力尚在锻炼阶段，感谢主办的邀请，很开心的一次合作。'
+    },
+    '冬之星轨 · 主视觉海报': {
+      time: '2026', role: '主视觉设计', tools: 'Illustrator · Photoshop',
+      desc: '冬之星 Frost Constellation 活动主视觉，含活动披露与场地信息长图。'
+    },
+    '人生四格宣图 01': {
+      time: '2026', role: '视觉设计 / 独立完成', tools: 'Illustrator',
+      desc: '是一次很特别的设计体验，从文字游戏中收到了灵感于是制作了这个设计，很开心能广受好评。'
+    },
+    '人生四格宣图 02': {
+      time: '2026', role: '视觉设计 / 独立完成', tools: 'Illustrator',
+      desc: '从翻包的审美积累中获取灵感，改成了桌子上凌乱放着的常用物品。'
+    },
+    '人生四格宣图 03': {
+      time: '2026', role: '视觉设计 / 独立完成', tools: 'Illustrator',
+      desc: '从翻包的审美积累中获取灵感，改成了桌子上凌乱放着的常用物品。'
+    },
+    '人生四格宣图 04': {
+      time: '2025', role: '视觉设计 / 独立完成', tools: 'Illustrator',
+      desc: '这是第一次做无属性的人生四格，虽然流量不是很好但是做的过程运用了许多学过的知识，很好的经验。'
+    },
+    '棉花娃娃设计': {
+      time: '2025', role: '插画设计 / 独立完成', tools: 'Illustrator',
+      desc: '包含手绘与 Illustrator 矢量图制作，部分已有落地产品。'
+    },
+    '青苹果系列周边': {
+      time: '2025', role: '周边设计 / 独立完成', tools: 'Illustrator',
+      desc: '青苹果主题周边设计，含透明卡套（正反面）与护照夹，搭配四叶草、星星与苹果元素印花。'
+    },
+    '护照夹设计': {
+      time: '2025', role: '周边设计 / 独立完成', tools: 'Illustrator',
+      desc: 'WISH 系列蓝色星星主题护照夹设计，含卡套、挂件与护照夹成品效果展示。'
+    },
+    '原创卡套设计': {
+      time: '24-25', role: '周边设计 / 独立完成', tools: 'Illustrator',
+      desc: '多种卡套设计，含 RIIZE 卡通、像素主题卡套设计与多款正反面印花方案。'
+    },
+    '贴纸页合集': {
+      time: '25-26', role: '插画设计 / 独立完成', tools: 'Illustrator',
+      desc: 'RIIZE 角色同人贴纸 sheet 设计合集，含三周年、成员个人主题等共 5 款配色与造型。'
+    },
+    '像素创作': {
+      time: '25-26', role: '像素创作 / 独立完成', tools: 'Medibang',
+      desc: '24 年开始尝试做像素画，近年拼豆又开始火起来，也正好做成了一些拼豆图纸。'
+    },
+    '商业标识系统': {
+      time: '2025', role: '标识设计 / 独立完成', tools: 'Illustrator',
+      desc: '社团活动使用的导视标识，用于制作 KT 板，含证件照摄影、简历美化及公务员、英语、企业等面试区标识。'
+    },
+    '活动标识设计': {
+      time: '2025', role: '标识设计 / 独立完成', tools: 'Illustrator',
+      desc: '以练手为主的成员名与应援风活动艺术字标识，含多款配色与星星、小熊等装饰元素。'
+    },
+    '人物插画': {
+      time: '25-26', role: '插画设计 / 独立完成', tools: 'Medibang',
+      desc: '人物头像厚涂与 OC 角色练习，含真人参考头像、角色立绘与头像、Q 版造型等多幅作品。'
+    },
   };
   function openDetail(title) {
-    document.getElementById('detail-title').textContent = title;
+    document.getElementById('detail-title').innerHTML = `${title}${workEn[title] ? `<span class="en">${workEn[title]}</span>` : ''}`;
     const imgs = workImages[title] || [];
     const box = document.getElementById('detail-box');
     if (imgs.length) {
-      box.innerHTML = imgs.map(src => `<img src="${src}" style="width:100%;border-radius:18px;margin-bottom:20px;box-shadow:6px 6px 14px #101111, -4px -4px 10px #323536;">`).join('');
+      box.innerHTML = imgs.map(src => `<img src="${src}">`).join('');
     } else {
       box.innerHTML = '<p style="color:#8f9295;line-height:2">作品图片待上传～</p>';
     }
+    const meta = workMeta[title] || {time:'', role:'', tools:'', desc:''};
+    document.getElementById('detail-time').textContent = meta.time;
+    document.getElementById('detail-role').textContent = meta.role;
+    document.getElementById('detail-tools').textContent = meta.tools;
+    document.getElementById('detail-desc').textContent = meta.desc;
     show('detail');
   }
   function toggleFolder(el) {
