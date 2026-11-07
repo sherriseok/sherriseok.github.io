@@ -88,6 +88,7 @@
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    display: flex; flex-direction: column; height: 100%;
   }
   .nav-card .num {
     font-family: "ZCOOL QingKe HuangYou", sans-serif;
@@ -101,6 +102,8 @@
     opacity: 1;
     text-shadow: 0 0 10px rgba(255,110,199,.4);
   }
+  .num-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .num-row .num { margin-bottom: 0; }
   .nav-card h3 {
     font-family: "ZCOOL QingKe HuangYou", "Noto Sans SC", sans-serif;
     font-size: 1.15rem;
@@ -113,12 +116,17 @@
     margin-left: 8px;
   }
   .nav-card p { color: var(--text-dim); font-size: .78rem; line-height: 1.7; }
+  .nav-card h3.title-hero {
+    font-size: 1.55rem; letter-spacing: 4px; color: #eef0f1;
+    text-shadow: 0 0 16px rgba(255,110,199,.28);
+  }
   .jump {
     display: inline-flex; align-items: center; gap: 5px;
-    margin-top: 9px; padding: 4px 12px; border-radius: 999px;
-    color: var(--accent); font-size: .7rem; letter-spacing: 1px;
+    margin-left: 0; padding: 3px 10px; border-radius: 999px;
+    color: var(--accent); font-size: .68rem; letter-spacing: 1px;
     background: rgba(255,110,199,.12);
     border: 1px solid rgba(255,110,199,.32);
+    vertical-align: middle;
   }
   .nav-card .dot {
     position: absolute; right: 26px; top: 26px;
@@ -681,7 +689,7 @@
           <div class="neu nav-card" onclick="show('works')">
             <div class="dot"></div>
             <div class="num">01</div>
-            <h3 data-i18n="navWorks">作品集<span class="en">PORTFOLIO</span></h3>
+            <h3 class="title-hero" data-i18n="navWorks">作品集<span class="en">PORTFOLIO</span></h3>
             <p data-i18n-misc="home01">品牌设计 / 品牌插画 / 运营设计 / 字体与其它</p>
           </div>
           <div class="neu nav-card" onclick="show('about')">
@@ -692,15 +700,15 @@
           </div>
           <div class="neu nav-card" onclick="window.open('https://xhslink.cn/o/7FuXu7sZ0Je','_blank')">
             <div class="dot"></div>
-            <div class="num">03</div>
+            <div class="num-row"><span class="num">03</span><span class="jump" data-i18n="jump">↗ 点击跳转</span></div>
             <h3>小红书<span class="en">XIAOHONGSHU</span></h3>
-            <p><span data-i18n-misc="home03">设计日常与作品更新</span><br><span class="jump" data-i18n="jump">↗ 点击跳转</span></p>
+            <p><span data-i18n-misc="home03">设计日常与作品更新</span></p>
           </div>
           <div class="neu nav-card" onclick="window.location.href='mailto:2298374046@qq.com'">
             <div class="dot"></div>
-            <div class="num">04</div>
+            <div class="num-row"><span class="num">04</span><span class="jump" data-i18n="jump">↗ 点击跳转</span></div>
             <h3 data-i18n="navContact">联系我<span class="en">CONTACT</span></h3>
-            <p>2298374046@qq.com<br><span class="jump" data-i18n="jump">↗ 点击跳转</span></p>
+            <p>2298374046@qq.com</p>
           </div>
         </div>
       </div>
