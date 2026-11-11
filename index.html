@@ -3,7 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHERRISEOK</title>
+<title>李思睿 SHERRISEOK · 视觉传达设计作品集</title>
+<meta name="description" content="李思睿 SHERRISEOK 的视觉传达设计作品集：文创产品设计、活动视觉、标志、插画与手工作品。浙江理工大学视觉传达设计本科在读。">
+<meta name="theme-color" content="#171818">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23292a2a'/%3E%3Cpath d='M32 11l4.9 16.1L53 32l-16.1 4.9L32 53l-4.9-16.1L11 32l16.1-4.9z' fill='%23ff6ec7'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SHERRISEOK">
+<meta property="og:title" content="李思睿 SHERRISEOK · 视觉传达设计作品集">
+<meta property="og:description" content="文创产品 / 活动视觉 / 标志 / 插画 / 手工 —— 浙江理工大学视觉传达设计在读，17 种作品。">
+<meta property="og:url" content="https://sherriseok.github.io/">
+<meta property="og:image" content="https://sherriseok.github.io/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="李思睿 · 视觉传达设计作品集">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="李思睿 SHERRISEOK · 视觉传达设计作品集">
+<meta name="twitter:description" content="文创产品 / 活动视觉 / 标志 / 插画 / 手工作品集">
+<meta name="twitter:image" content="https://sherriseok.github.io/og-cover.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
@@ -572,6 +589,28 @@
     box-shadow: 6px 6px 14px #101111, -4px -4px 10px #323536;
   }
   .about-text { flex: 1; }
+  /* 简历下载 */
+  .cv-row {
+    display: flex; align-items: center; gap: 14px;
+    flex-wrap: wrap; margin-top: 18px;
+  }
+  .cv-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: 999px;
+    background: rgba(255,110,199,.12);
+    border: 1px solid rgba(255,110,199,.38);
+    color: var(--accent); text-decoration: none;
+    font-family: "ZCOOL QingKe HuangYou", "Noto Sans SC", sans-serif;
+    font-size: .95rem; letter-spacing: 2px;
+    transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+  }
+  .cv-btn:hover {
+    background: rgba(255,110,199,.2);
+    border-color: var(--accent);
+    box-shadow: 0 0 18px rgba(255,110,199,.3);
+    transform: translateY(-1px);
+  }
+  .cv-note { color: #6e7475; font-size: .72rem; letter-spacing: .5px; }
   @media (min-width: 720px) {
     .about-card {
       flex-direction: row;
@@ -868,6 +907,13 @@
       </div>
     </div>
 
+    <div class="cv-row">
+      <a class="cv-btn" href="resume.pdf" download="李思睿-视觉传达设计-简历.pdf" target="_blank" rel="noopener" aria-label="下载简历 PDF">
+        <span data-i18n="cv">↓ 下载简历 PDF</span>
+      </a>
+      <span class="cv-note" data-i18n="cvNote">完整项目经历 · 已隐去手机号</span>
+    </div>
+
     <div style="margin-top: 30px;">
       <div class="folder-item">
         <div class="folder-head" onclick="toggleFolder(this)">
@@ -965,7 +1011,8 @@
       prev: '‹ 上一件', next: '下一件 ›', jump: '↗ 点击跳转', preparing: '筹备中',
       statCats: '个分类', statWorks: '种作品',
       edu: '教育经历', skill: '软件技能', direction: '设计方向', contact: '联系方式',
-      email: '邮箱 EMAIL', wechat: '微信 WECHAT', xhs: '小红书 XHS'
+      email: '邮箱 EMAIL', wechat: '微信 WECHAT', xhs: '小红书 XHS',
+      cv: '↓ 下载简历 PDF', cvNote: '完整项目经历 · 已隐去手机号'
     },
     en: {
       navHome: 'Home', navWorks: 'Portfolio', navAbout: 'About', navContact: 'Contact',
@@ -973,7 +1020,8 @@
       prev: '‹ Prev', next: 'Next ›', jump: '↗ Open', preparing: 'Coming soon',
       statCats: 'categories', statWorks: 'works',
       edu: 'Education', skill: 'Skills', direction: 'Direction', contact: 'Contact',
-      email: 'Email', wechat: 'WeChat', xhs: 'XHS'
+      email: 'Email', wechat: 'WeChat', xhs: 'XHS',
+      cv: '↓ Download CV (PDF)', cvNote: 'Full project history · phone number omitted'
     },
     ko: {
       navHome: '홈', navWorks: '포트폴리오', navAbout: '소개', navContact: '연락처',
@@ -981,7 +1029,8 @@
       prev: '‹ 이전 작품', next: '다음 작품 ›', jump: '↗ 바로가기', preparing: '준비중',
       statCats: '개 분류', statWorks: '개 작품',
       edu: '학력', skill: '스킬', direction: '디자인 방향', contact: '연락처',
-      email: '이메일 EMAIL', wechat: '위챗 WECHAT', xhs: 'XHS'
+      email: '이메일 EMAIL', wechat: '위챗 WECHAT', xhs: 'XHS',
+      cv: '↓ 이력서 PDF 다운로드', cvNote: '전체 프로젝트 경력 · 휴대폰 번호 제외'
     }
   };
   const catKo = {
