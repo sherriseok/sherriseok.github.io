@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SHERRISEOK">
 <meta property="og:title" content="李思睿 SHERRISEOK · 视觉传达设计作品集">
-<meta property="og:description" content="文创产品 / 活动视觉 / 标志 / 插画 / 手工 —— 浙江理工大学视觉传达设计在读，17 种作品。">
+<meta property="og:description" content="文创产品 / 活动视觉 / 标志 / 插画 / 手工 —— 浙江理工大学视觉传达设计在读，20 种作品。">
 <meta property="og:url" content="https://sherriseok.github.io/">
 <meta property="og:image" content="https://sherriseok.github.io/og-cover.jpg">
 <meta property="og:image:width" content="1200">
@@ -273,9 +273,10 @@
     display: flex; gap: 6px;
   }
   .c-dot {
-    width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.4); cursor: pointer;
+    width: 7px; height: 7px; border-radius: 50%; background: rgba(0,0,0,.28); cursor: pointer;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.45);
   }
-  .c-dot.active { background: var(--accent); }
+  .c-dot.active { background: var(--accent); box-shadow: 0 0 0 1px rgba(255,110,199,.55), 0 0 7px rgba(255,110,199,.5); }
   .fc-info { padding: 18px 22px 22px; }
   .folder-card .no {
     font-family: "Space Grotesk", sans-serif;
@@ -719,7 +720,7 @@
         <div class="folder-top-row">
           <div>
             <div class="en-big">SHERRISEOK</div>
-            <div class="folder-tagline">VISUAL DESIGN · 杭州</div>
+            <div class="folder-tagline" data-i18n-misc="tagline">VISUAL DESIGN · 杭州</div>
           </div>
           <div class="name-box" id="name-box">李思睿<span class="name-tip" id="name-tip"></span></div>
         </div>
@@ -740,7 +741,7 @@
           <div class="neu nav-card" onclick="window.open('https://xhslink.cn/o/7FuXu7sZ0Je','_blank')">
             <div class="dot"></div>
             <div class="num-row"><span class="num">03</span><span class="jump" data-i18n="jump">↗ 点击跳转</span></div>
-            <h3>小红书<span class="en">XIAOHONGSHU</span></h3>
+            <h3 data-i18n="navXhs">小红书<span class="en">REDNOTE</span></h3>
             <p><span data-i18n-misc="home03">设计日常与作品更新</span></p>
           </div>
           <div class="neu nav-card" onclick="window.location.href='mailto:2298374046@qq.com'">
@@ -797,6 +798,11 @@
         <div class="num">E</div>
         <h3 data-i18n-cat="手工作品">手工作品<span class="en">HANDICRAFT</span></h3>
         <p data-i18n-misc="catShougong">钩针 / 刺绣等手工</p>
+      </div>
+      <div class="neu nav-card" onclick="openCat('学校作业','COURSEWORK')">
+        <div class="num">F</div>
+        <h3 data-i18n-cat="学校作业">学校作业<span class="en">COURSEWORK</span></h3>
+        <p data-i18n-misc="catXuexiao">课程作业 / 课程设计</p>
       </div>
     </div>
   </div>
@@ -908,10 +914,9 @@
     </div>
 
     <div class="cv-row">
-      <a class="cv-btn" href="resume.pdf" download="李思睿-视觉传达设计-简历.pdf" target="_blank" rel="noopener" aria-label="下载简历 PDF">
+      <a class="cv-btn" href="resume.pdf" download="李思睿-视觉传达设计-简历.pdf" target="_blank" rel="noopener" aria-label="下载简历 PDF" data-i18n-label="cvLabel">
         <span data-i18n="cv">↓ 下载简历 PDF</span>
       </a>
-      <span class="cv-note" data-i18n="cvNote">完整项目经历 · 已隐去手机号</span>
     </div>
 
     <div style="margin-top: 30px;">
@@ -922,7 +927,7 @@
           <div class="f-arrow">+</div>
         </div>
         <div class="f-body">
-          <p data-i18n-about="edu">2024 — 2028 · 浙江理工大学<br>视觉传达设计 · 本科在读 · GPA 3.33/4.0<br>主修：品牌 / 包装 / 插画 / 版式 / UI / 数字媒体</p>
+          <p data-i18n-about="edu">2024 — 2028 · 浙江理工大学<br>视觉传达设计 · 本科在读 · GPA 3.33/4.0<br>主修：品牌 / 包装 / 插画 / 版式</p>
         </div>
       </div>
 
@@ -958,7 +963,7 @@
           <div class="contact-list">
             <div class="contact-row"><span class="k"><span class="contact-ico"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 6.5 12 13l8.5-6.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span><span data-i18n="email">邮箱 EMAIL</span></span><span class="v">2298374046@qq.com</span></div>
             <div class="contact-row"><span class="k"><span class="contact-ico"><svg viewBox="0 0 24 24"><path d="M9.5 3C5.4 3 2 5.9 2 9.5c0 2 1.1 3.8 2.8 4.9L4.3 17l3.3-1.8c.6.2 1.2.3 1.9.3h.3A7.2 7.2 0 0 1 9.5 9.5C9.5 5.9 12.6 3 16.5 3S23 5.9 23 9.5 19.9 16 16 16h-.4c-.7 0-1.3-.1-1.9-.3L10.4 17.5l.5-2.6A7.3 7.3 0 0 0 18 9.5C18 5.9 15.6 3 12.5 3z" fill="none" stroke="currentColor" stroke-width="1.6" transform="translate(-1.5 0) scale(.92)"/></svg></span><span data-i18n="wechat">微信 WECHAT</span></span><span class="v">Sherr1s_e0k</span></div>
-            <div class="contact-row"><span class="k"><span class="contact-ico"><svg viewBox="0 0 24 24"><path d="M6 3h12v18H6z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8h6M9 12h6M9 16h4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span><span data-i18n="xhs">小红书 XHS</span></span><span class="v">Sherris_eok · 5589507829</span></div>
+            <div class="contact-row"><span class="k"><span class="contact-ico"><svg viewBox="0 0 24 24"><path d="M6 3h12v18H6z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8h6M9 12h6M9 16h4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span><span data-i18n="xhs">小红书 REDNOTE</span></span><span class="v">Sherris_eok · 5589507829</span></div>
           </div>
         </div>
       </div>
@@ -987,7 +992,7 @@
   </div>
 </div>
 
-<button id="to-top" onclick="backToTop()" aria-label="回到顶部">↑</button>
+<button id="to-top" onclick="backToTop()" aria-label="回到顶部" data-i18n-label="topLabel">↑</button>
 
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <button class="lb-close" onclick="closeLightbox()">×</button>
@@ -999,49 +1004,58 @@
 <script>
   let currentCat = '', currentCatEn = '', currentTitle = '', currentIdx = 0;
   let detailImgs = [], lbIdx = 0, hoverCar = null, currentScreen = 'home';
+  const carTimers = new Set();
   const catEn = {
     '文创产品设计': 'MERCHANDISE', '美工设计': 'POSTER', '标志设计': 'LOGO',
-    '绘画作品': 'ILLUSTRATION', '手工作品': 'HANDICRAFT'
+    '绘画作品': 'ILLUSTRATION', '手工作品': 'HANDICRAFT', '学校作业': 'COURSEWORK'
   };
   let lang = 'zh';
   const i18n = {
     zh: {
-      navHome: '首页', navWorks: '作品集', navAbout: '关于我', navContact: '联系我',
+      navHome: '首页', navWorks: '作品集', navAbout: '关于我', navContact: '联系我', navXhs: '小红书',
       labelTime: '时间 TIME', labelRole: '角色 ROLE', labelTools: '工具 TOOLS', labelDesc: '说明 DESCRIPTION',
       prev: '‹ 上一件', next: '下一件 ›', jump: '↗ 点击跳转', preparing: '筹备中',
       statCats: '个分类', statWorks: '种作品',
       edu: '教育经历', skill: '软件技能', direction: '设计方向', contact: '联系方式',
-      email: '邮箱 EMAIL', wechat: '微信 WECHAT', xhs: '小红书 XHS',
-      cv: '↓ 下载简历 PDF', cvNote: '完整项目经历 · 已隐去手机号'
+      email: '邮箱 EMAIL', wechat: '微信 WECHAT', xhs: '小红书 REDNOTE',
+      cv: '↓ 下载简历 PDF', cvNote: '完整项目经历 · 已隐去手机号',
+      prevImg: '上一张', nextImg: '下一张', cvLabel: '下载简历 PDF', topLabel: '回到顶部'
     },
     en: {
-      navHome: 'Home', navWorks: 'Portfolio', navAbout: 'About', navContact: 'Contact',
+      navHome: 'Home', navWorks: 'Portfolio', navAbout: 'About', navContact: 'Contact', navXhs: 'Rednote',
       labelTime: 'Time', labelRole: 'Role', labelTools: 'Tools', labelDesc: 'Description',
       prev: '‹ Prev', next: 'Next ›', jump: '↗ Open', preparing: 'Coming soon',
       statCats: 'categories', statWorks: 'works',
       edu: 'Education', skill: 'Skills', direction: 'Direction', contact: 'Contact',
-      email: 'Email', wechat: 'WeChat', xhs: 'XHS',
-      cv: '↓ Download CV (PDF)', cvNote: 'Full project history · phone number omitted'
+      email: 'Email', wechat: 'WeChat', xhs: 'Rednote',
+      cv: '↓ Download CV (PDF)', cvNote: 'Full project history · phone number omitted',
+      prevImg: 'Previous image', nextImg: 'Next image', cvLabel: 'Download CV (PDF)', topLabel: 'Back to top'
     },
     ko: {
-      navHome: '홈', navWorks: '포트폴리오', navAbout: '소개', navContact: '연락처',
+      navHome: '홈', navWorks: '포트폴리오', navAbout: '소개', navContact: '연락처', navXhs: '레드노트',
       labelTime: '시간 TIME', labelRole: '역할 ROLE', labelTools: '도구 TOOLS', labelDesc: '설명 DESCRIPTION',
       prev: '‹ 이전 작품', next: '다음 작품 ›', jump: '↗ 바로가기', preparing: '준비중',
       statCats: '개 분류', statWorks: '개 작품',
       edu: '학력', skill: '스킬', direction: '디자인 방향', contact: '연락처',
-      email: '이메일 EMAIL', wechat: '위챗 WECHAT', xhs: 'XHS',
-      cv: '↓ 이력서 PDF 다운로드', cvNote: '전체 프로젝트 경력 · 휴대폰 번호 제외'
+      email: '이메일 EMAIL', wechat: '위챗 WECHAT', xhs: '레드노트 REDNOTE',
+      cv: '↓ 이력서 PDF 다운로드', cvNote: '전체 프로젝트 경력 · 휴대폰 번호 제외',
+      prevImg: '이전 이미지', nextImg: '다음 이미지', cvLabel: '이력서 PDF 다운로드', topLabel: '맨 위로'
     }
   };
   const catKo = {
     '文创产品设计': '문화상품 디자인', '美工设计': '그래픽 디자인', '标志设计': '로고 디자인',
-    '绘画作品': '회화 작품', '手工作品': '수공예 작품'
+    '绘画作品': '회화 작품', '手工作品': '수공예 작품', '学校作业': '교과 과제'
   };
   const t = key => i18n[lang][key] || key;
   const catName = c => lang === 'ko' ? (catKo[c] || c) : lang === 'en' ? (catEn[c] || c) : c;
 
   function show(id) {
     currentScreen = id;
+    // 离开分类页时停掉封面轮播，别让它在后台空转
+    if (id !== 'category' && carTimers.size) {
+      carTimers.forEach(clearInterval);
+      carTimers.clear();
+    }
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById('screen-' + id).classList.add('active');
     renderCrumb(id);
@@ -1087,7 +1101,11 @@
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const en = el.querySelector('.en');
       const txt = t(el.getAttribute('data-i18n'));
-      el.innerHTML = en ? `${txt}${en.outerHTML}` : txt;
+      el.innerHTML = (en && lang !== 'en') ? `${txt}${en.outerHTML}` : txt;
+    });
+    // 图标按钮的无障碍标签跟着语言走
+    document.querySelectorAll('[data-i18n-label]').forEach(el => {
+      el.setAttribute('aria-label', t(el.getAttribute('data-i18n-label')));
     });
     document.querySelectorAll('[data-i18n-cat]').forEach(el => {
       const c = el.getAttribute('data-i18n-cat');
@@ -1137,6 +1155,11 @@
         ['钩针编织', '25-26 · 娃娃帽 / 毛线帽 / 小包', ['cro1c.jpg','cro2c.jpg','cro3c.jpg','cro4c.jpg','cro5c.jpg','cro6c.jpg','cro7c.jpg','cro8c.jpg']],
         ['刺绣作品', '26 · 刺绣娃娃', ['emb2c.jpg','emb1c.jpg']],
       ],
+      '学校作业': [
+        ['图形设计作业', '2025.10 · 图形设计课作业', ['gdc1.jpg', 'gdc8.jpg', 'gdc3.jpg', 'gdc4.jpg', 'gdc6.jpg', 'gdc7.jpg'], 'center 50%'],
+        ['综合构成作业', '2025.03 · 综合构成课作业', ['zgc1.jpg', 'zgc2.jpg', 'zgc3.jpg'], 'center 50%'],
+        ['字体设计作业', '2024.11 · 字体设计课作业', ['fdc1.jpg', 'fdc2.jpg', 'fdc3.jpg', 'fdc4.jpg', 'fdc5.jpg', 'fdc6.jpg'], 'center 50%'],
+      ],
     };
   function openCat(title, en) {
     currentCat = title; currentCatEn = en || '';
@@ -1149,12 +1172,12 @@
         <div class="fc-img${w[2] ? '' : ' placeholder'}">${
           w[2] ? (Array.isArray(w[2]) ?
             `<div class="carousel" data-idx="0" data-total="${w[2].length}">
-              ${w[2].map((s,idx) => `<img class="c-slide${idx===0?' active':''}" src="${s}" draggable="false" style="object-position:${(w[4]&&w[4][idx])||w[3]||'center 88%'};">`).join('')}
-              <button class="c-arrow c-prev" aria-label="上一张">‹</button>
-              <button class="c-arrow c-next" aria-label="下一张">›</button>
+              ${w[2].map((s,idx) => `<img class="c-slide${idx===0?' active':''}" src="${s}" alt="${workTitle(w[0])} · ${idx + 1}" ${idx? 'loading="lazy"':''} decoding="async" draggable="false" style="object-position:${(w[4]&&w[4][idx])||w[3]||'center 88%'};">`).join('')}
+              <button class="c-arrow c-prev" aria-label="${t('prevImg')}" data-i18n-label="prevImg">‹</button>
+              <button class="c-arrow c-next" aria-label="${t('nextImg')}" data-i18n-label="nextImg">›</button>
               <div class="c-dots">${w[2].map((_,idx) => `<span class="c-dot${idx===0?' active':''}"></span>`).join('')}</div>
             </div>`
-            : `<img src="${w[2]}" draggable="false" style="width:100%;height:100%;object-fit:cover;object-position:${w[3]||'center 35%'};border-radius:14px 14px 0 0;">`)
+            : `<img src="${w[2]}" alt="${workTitle(w[0])}" draggable="false" style="width:100%;height:100%;object-fit:cover;object-position:${w[3]||'center 35%'};border-radius:14px 14px 0 0;">`)
           : `<span class="badge">${t('preparing')}</span>`
         }</div>
         <div class="fc-info">
@@ -1177,8 +1200,8 @@
         dots.forEach((d, i) => d.classList.toggle('active', i === idx));
         car._idx = idx; car._show = show;
       };
-      const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
-      const start = () => { stop(); timer = setInterval(() => show(idx + 1), 3500); };
+      const stop = () => { if (timer) { clearInterval(timer); carTimers.delete(timer); timer = null; } };
+      const start = () => { stop(); timer = setInterval(() => { if (!document.hidden) show(idx + 1); }, 3500); carTimers.add(timer); };
       prev.addEventListener('click', e => { e.stopPropagation(); show(idx - 1); });
       next.addEventListener('click', e => { e.stopPropagation(); show(idx + 1); });
       dots.forEach((d, i) => d.addEventListener('click', e => { e.stopPropagation(); show(i); }));
@@ -1206,6 +1229,9 @@
     '商业标识系统': 'Brand Identity System',
     '贴纸页合集': 'Sticker Sheet Collection',
     '像素创作': 'Pixel Art & Perler Beads',
+    '图形设计作业': 'Graphic Design Coursework',
+    '综合构成作业': 'Composition Studies',
+    '字体设计作业': 'Type Design Coursework',
   };
   // 作品名韩语（英语沿用 workEn）
   const workKo = {
@@ -1226,6 +1252,9 @@
     '商业标识系统': '브랜드 아이덴티티 시스템',
     '贴纸页合集': '스티커 시트 컬렉션',
     '像素创作': '픽셀 아트 & 비즈 도안',
+    '图形设计作业': '그래픽 디자인 과제',
+    '综合构成作业': '종합 구성 과제',
+    '字体设计作业': '서체 디자인 과제',
   };
   // 副标题（按作品名索引，zh 为原文）
   const subMap = {
@@ -1246,6 +1275,10 @@
     '人物插画': { en: '25-26 · Portrait Painting / OC Practice', ko: '25-26 · 헤드 드로잉 / OC 연습' },
     '钩针编织': { en: '25-26 · Doll Hat / Beanie / Pouch', ko: '25-26 · 인형 모자 / 비니 / 파우치' },
     '刺绣作品': { en: '26 · Embroidered Doll', ko: '26 · 자수 인형' },
+    '课程作业合集': { en: '2024—2026 · Course Design', ko: '2024—2026 · 교과 디자인' },
+    '图形设计作业': { en: '2025.10 · Graphic Design Coursework', ko: '2025.10 · 그래픽 디자인 과제' },
+    '综合构成作业': { en: '2025.03 · Composition Coursework', ko: '2025.03 · 종합 구성 과제' },
+    '字体设计作业': { en: '2024.11 · Type Design Coursework', ko: '2024.11 · 서체 디자인 과제' },
   };
   // 角色标签（按中文角色索引）
   const roleMap = {
@@ -1256,6 +1289,9 @@
     '标识设计 / 独立完成': { en: 'Logo Design / Independent', ko: '로고 디자인 / 단독 작업' },
     '像素创作 / 独立完成': { en: 'Pixel Art / Independent', ko: '픽셀 아트 / 단독 작업' },
     '手工制作 / 独立完成': { en: 'Handcraft / Independent', ko: '수공예 / 단독 작업' },
+    '拼贴创作 / 独立完成': { en: 'Collage / Independent', ko: '콜라주 / 단독 작업' },
+    '字体设计 / 独立完成': { en: 'Type Design / Independent', ko: '서체 디자인 / 단독 작업' },
+    '平面构成 / 色彩重构 / 独立完成': { en: 'Plane Composition / Colour Reconstruction / Independent', ko: '평면 구성 / 색채 재구성 / 단독 작업' },
   };
   const workImages = {
     '冬之星轨 · 门票设计': ['eso.jpg'],
@@ -1275,6 +1311,9 @@
     '人物插画': ['draw1.jpg','draw6.jpg','draw2.jpg','draw3.jpg','draw4.jpg','draw5.jpg','px_solo.jpg','draw7.jpg','draw8.jpg'],
     '钩针编织': ['cro1.jpg','cro2.jpg','cro3.jpg','cro4.jpg','cro5.jpg','cro6.jpg','cro7.jpg','cro8.jpg'],
     '刺绣作品': ['emb2.jpg','emb1.jpg'],
+    '图形设计作业': ['gd1.jpg','gd2.jpg','gd3.jpg','gd4.jpg','gd5.jpg','gd6.jpg','gd7.jpg','gd8.jpg'],
+    '综合构成作业': ['zg1.jpg','zg2.jpg','zg3.jpg','zg4.jpg','zg5.jpg','zg6.jpg','zg7.jpg','zg8.jpg','zg9.jpg','zg10.jpg','zg11.jpg'],
+    '字体设计作业': ['fd1.jpg'],
   };
   const workMeta = {
     '冬之星轨 · 门票设计': {
@@ -1344,6 +1383,18 @@
     '刺绣作品': {
       time: '26', role: '手工制作 / 独立完成', tools: '刺绣 / 布料',
       desc: '26年初之后刚刚开始尝试自己刺绣做娃娃，上手还挺快的比较满意！真的很喜欢做手工，在学习了不同东西之后更加坚定自己对手工还算比较有天赋。'
+    },
+    '图形设计作业': {
+      time: '2025.10', role: '拼贴创作 / 独立完成', tools: '拼贴 · 手作 · AI 辅助',
+      desc: '大部分时候专业课作业都做的不够用心，总在纠结到底是用 ai 还是绘画还是使用拼贴之类的。最后这门作业大部分时候是自己手搓，赶时间的时候用 ai。但现在这个文件夹内的几乎都没有使用 ai。'
+    },
+    '综合构成作业': {
+      time: '2025.03', role: '平面构成 / 色彩重构 / 独立完成', tools: '手绘 · Illustrator',
+      desc: '综合构成课的两组作业。平面构成是手绘的黑白稿，把一张参考照片拆成几何块面和排线、点阵、棋盘格这些肌理，练的是画面的层次和疏密；色彩重构则是从名画里抽色，把同一个立体构成重新配了一遍——暖红、冷蓝、绿色、紫色做了四版。'
+    },
+    '字体设计作业': {
+      time: '2024.11', role: '字体设计 / 独立完成', tools: 'Illustrator',
+      desc: '大一的字体设计课作业，把名字里的“思”字拆开重组成 25 种结构——方块、圆、齿轮、门、盒子都试了一遍，主要练字形的骨架和黑白比例。'
     },
   };
   // 作品介绍（按作品名索引）
@@ -1416,6 +1467,18 @@
       en: "I only started embroidering dolls in early 2026. I picked it up quickly and am fairly happy with the results! I truly love handcrafts; after learning different skills, I'm more confident I have a natural feel for them.",
       ko: '2026년 초에 직접 자수 인형 만들기를 시작했습니다. 적응이 빨라 비교적 만족합니다! 수공예를 정말 좋아하고, 여러 것을 배우며 손재주가 있다는 확신이 더 들었습니다.'
     },
+    '图形设计作业': {
+      en: "Honestly I didn't put as much care into coursework as I should have — I kept going back and forth between AI, drawing and collage. In the end most of this was made by hand, with AI only when I was short on time. Almost nothing in this folder was made with AI.",
+      ko: '솔직히 전공 과제에 충분히 정성을 쏟지 못했습니다. AI를 쓸지, 직접 그릴지, 콜라주를 할지 계속 고민했어요. 결국 대부분은 직접 만들었고, 시간에 쫓길 때만 AI를 사용했습니다. 지금 이 폴더의 작품들은 거의 AI를 쓰지 않았습니다.'
+    },
+    '综合构成作业': {
+      en: "Two sets of assignments from the Composition course. The plane composition is a hand-drawn black-and-white piece that breaks a reference photo down into geometric planes plus textures — hatching, dot grids, checkerboards — practising depth and density. The colour reconstruction samples the palette of a famous painting and recolours the same three-dimensional composition in four versions: warm red, cool blue, green and purple.",
+      ko: '종합 구성 수업의 두 과제입니다. 평면 구성은 참고 사진을 기하학적 면과 해칭, 점 격자, 체크 패턴 등 질감으로 분해한 흑백 드로잉으로 화면의 층위와 밀도를 연습했습니다. 색채 재구성은 명화에서 색을 추출해 같은 입체 구성을 난색, 한색, 초록, 보라 네 가지로 다시 배색한 작업입니다.'
+    },
+    '字体设计作业': {
+      en: 'Freshman-year type design assignment: I took the 思 (si) from my own name apart and rebuilt it 25 different ways — squares, circles, gears, doors, boxes — mostly practising the skeleton of the character and its balance of black and white.',
+      ko: '1학년 서체 디자인 과제로, 제 이름에 들어가는 "思"자를 분해해 25가지 구조로 다시 만들었습니다. 사각형, 원, 톱니, 문, 상자 형태까지 시도하며 자형의 뼈대와 흑백 비례를 익혔습니다.'
+    },
   };
   // 关于我正文（含 <br>，以 innerHTML 渲染）
   const aboutMap = {
@@ -1428,8 +1491,8 @@
       ko: '절강이공대학교 시각디자인과 재학 중입니다. 디자인, 패션, 창의적인 것을 좋아합니다. 손재주가 좋고 Illustrator 등 소프트웨어를 자습으로 익혔으며, 코바늘, 자수 등 공예를 즐기고 습득력이 빠릅니다. 앞으로 더 아름답고 재미있는 것을 배우고 싶어요!'
     },
     edu: {
-      en: '2024 — 2028 · Zhejiang Sci-Tech University<br>Visual Communication Design · Undergraduate · GPA 3.33/4.0<br>Major: Branding / Packaging / Illustration / Layout / UI / Digital Media',
-      ko: '2024 — 2028 · 절강이공대학교<br>시각디자인 · 학사 재학 · GPA 3.33/4.0<br>전공: 브랜딩 / 패키지 / 일러스트 / 편집 / UI / 디지털 미디어'
+      en: '2024 — 2028 · Zhejiang Sci-Tech University<br>Visual Communication Design · Undergraduate · GPA 3.33/4.0<br>Major: Branding / Packaging / Illustration / Layout',
+      ko: '2024 — 2028 · 절강이공대학교<br>시각디자인 · 학사 재학 · GPA 3.33/4.0<br>전공: 브랜딩 / 패키지 / 일러스트 / 편집'
     },
     skill: {
       en: 'Illustrator · Photoshop · Blender · Medibang<br>Hands-on; able to deliver independently from illustration to physical product.',
@@ -1450,7 +1513,9 @@
     catLogo: { en: 'Brand logos / Event logos', ko: '브랜드 로고 / 이벤트 로고' },
     catHuihua: { en: 'Stickers / Pixel art', ko: '스티커 / 픽셀 아트' },
     catShougong: { en: 'Crochet, embroidery & crafts', ko: '코바늘 / 자수 등 공예' },
+    catXuexiao: { en: 'Coursework / Course projects', ko: '교과 과제 / 수업 프로젝트' },
     noImg: { en: 'Work images to be uploaded', ko: '작품 이미지 업로드 예정' },
+    tagline: { en: 'VISUAL DESIGN · HANGZHOU', ko: 'VISUAL DESIGN · 항저우' },
     nameTip: { zh: 'hi，你竟然能发现这里哈哈哈。恭喜发现彩蛋！看到这里还不来加我！', en: "Hi, you actually found this! Congrats on unlocking the easter egg — why not add me?", ko: 'hi, 여기를 발견하다니! 해피 이스터에그! 그럼 이제 저를 추가해 주세요!' }
   };
   // 取值辅助：zh 用原文，其它语言走字典并兜底原文
@@ -1468,7 +1533,7 @@
     detailImgs = workImages[title] || [];
     const box = document.getElementById('detail-box');
     if (detailImgs.length) {
-      box.innerHTML = detailImgs.map((src, i) => `<img src="${src}" draggable="false" onclick="openLightbox(${i})">`).join('');
+      box.innerHTML = detailImgs.map((src, i) => `<img src="${src}" alt="${workTitle(title)} · ${i + 1}" loading="lazy" decoding="async" draggable="false" onclick="openLightbox(${i})">`).join('');
     } else {
       box.innerHTML = `<p style="color:#8f9295;line-height:2">${lang === 'zh' ? '作品图片待上传～' : miscOf('noImg')}</p>`;
     }
